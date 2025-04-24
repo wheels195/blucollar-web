@@ -4,20 +4,9 @@ import { Suspense } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import NotFoundPage from './components/NotFoundPage'
 
-const NotFoundPage = dynamic(() => import('./components/NotFoundPage'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex flex-col items-center justify-center min-h-screen py-20 text-center">
-      <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
-      <p className="text-lg text-muted-foreground mb-8">
-        Loading...
-      </p>
-    </div>
-  ),
-})
-
-function NotFoundContent() {
+const NotFoundContent = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-20 text-center">
       <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>

@@ -1,13 +1,9 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 export default function NotFoundPage() {
-  // This will only run on the client side
-  const searchParams = useSearchParams()
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-20 text-center">
       <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
