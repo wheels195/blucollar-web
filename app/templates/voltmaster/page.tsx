@@ -4,9 +4,8 @@ import Link from "next/link"
 import { NavigationButtons } from "@/components/navigation-buttons"
 import { Button } from "@/components/ui/button"
 import { Suspense } from "react"
-import { useSearchParams } from "next/navigation"
 
-export default function VoltMasterTemplate() {
+function VoltMasterContent() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-900">
       <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-gray-900/80 backdrop-blur-md">
@@ -40,5 +39,13 @@ export default function VoltMasterTemplate() {
         </section>
       </main>
     </div>
+  )
+}
+
+export default function VoltMasterTemplate() {
+  return (
+    <Suspense fallback={null}>
+      <VoltMasterContent />
+    </Suspense>
   )
 }

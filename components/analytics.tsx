@@ -1,20 +1,20 @@
 "use client"
 
-import { useEffect } from "react"
-import { usePathname, useSearchParams } from "next/navigation"
+import { Suspense } from "react"
+import { usePathname } from "next/navigation"
+import { AnalyticsContent } from "./analytics-content"
 
 export function Analytics() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const is404 = pathname?.includes('not-found') || pathname === '/404' || pathname?.includes('(error)')
 
-  useEffect(() => {
-    // This is where you would normally initialize and track page views
-    // with your analytics provider (Google Analytics, Plausible, etc.)
-    const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : "")
+  if (is404) {
+    return null
+  }
 
-    // Example tracking call (replace with your actual analytics code)
-    console.log(`Page view tracked: ${url}`)
-  }, [pathname, searchParams])
-
-  return null
+  return (
+    <Suspense fallback={null}>
+      <AnalyticsContent />
+    </Suspense>
+  )
 }

@@ -1,21 +1,18 @@
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
-// This is a Server Component by default
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-20 text-center">
-      <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
-      <p className="text-lg text-muted-foreground mb-8">
-        The page you are looking for does not exist.
+    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+      <h1 className="text-4xl font-bold tracking-tight mb-4">404 - Page Not Found</h1>
+      <p className="text-muted-foreground mb-8">
+        Sorry, we couldn't find the page you're looking for.
       </p>
-      <Link
-        href="/"
-        className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full text-white bg-primary hover:bg-primary/90 transition-all duration-200"
-      >
-        Return Home
-        <ArrowRight size={18} className="ml-2" />
-      </Link>
+      <Button asChild>
+        <Link href="/">
+          Return Home
+        </Link>
+      </Button>
     </div>
   )
 } 

@@ -1,16 +1,12 @@
 "use client"
 
 import { Suspense } from "react"
-import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, Check, Mail, MapPin, Phone } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
 function UniversalContent() {
-  const searchParams = useSearchParams()
-
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
       {/* Navigation */}
@@ -565,7 +561,7 @@ function UniversalContent() {
 
 export default function UniversalPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={null}>
       <UniversalContent />
     </Suspense>
   )

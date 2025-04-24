@@ -2,9 +2,8 @@ import type React from "react"
 import "./globals.css"
 import { Inter, Space_Grotesk } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Analytics } from "@/components/analytics"
 import { StickyContactCTA } from "@/components/sticky-contact-cta"
-import { Suspense } from "react"
+import { ClientAnalytics } from "@/components/client-analytics"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,11 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <Suspense>
-            {children}
-            <StickyContactCTA />
-          </Suspense>
-          <Analytics />
+          {children}
+          <StickyContactCTA />
+          <ClientAnalytics />
         </ThemeProvider>
       </body>
     </html>
