@@ -5,9 +5,13 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
-function NotFoundContent() {
+// Separate component that uses the hook
+function SearchParamsContent() {
   const searchParams = useSearchParams()
-  
+  return null // We're not actually using the searchParams, so return null
+}
+
+function NotFoundContent() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-20 text-center">
       <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
@@ -27,8 +31,11 @@ function NotFoundContent() {
 
 export default function NotFound() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <SearchParamsContent />
+      </Suspense>
       <NotFoundContent />
-    </Suspense>
+    </>
   )
 } 
