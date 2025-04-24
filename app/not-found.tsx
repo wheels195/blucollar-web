@@ -5,12 +5,6 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
-// Dynamically import the component that uses useSearchParams
-const SearchParamsContent = dynamic(() => import('./components/SearchParamsContent'), {
-  ssr: false,
-  loading: () => null,
-})
-
 const NotFoundPage = dynamic(() => import('./components/NotFoundPage'), {
   ssr: false,
   loading: () => (
