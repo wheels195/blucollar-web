@@ -1,15 +1,14 @@
 'use client'
 
 import { Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import dynamic from 'next/dynamic'
 
-// Separate component that uses the hook
-function SearchParamsContent() {
-  const searchParams = useSearchParams()
-  return null // We're not actually using the searchParams, so return null
-}
+// Dynamically import the component that uses useSearchParams
+const SearchParamsContent = dynamic(() => import('./components/SearchParamsContent'), {
+  ssr: false,
+})
 
 function NotFoundContent() {
   return (
@@ -32,7 +31,7 @@ function NotFoundContent() {
 export default function NotFound() {
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={null}>
         <SearchParamsContent />
       </Suspense>
       <NotFoundContent />
