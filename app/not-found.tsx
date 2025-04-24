@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic'
 // Dynamically import the component that uses useSearchParams
 const SearchParamsContent = dynamic(() => import('./components/SearchParamsContent'), {
   ssr: false,
+  loading: () => null,
 })
 
 function NotFoundContent() {
@@ -30,11 +31,9 @@ function NotFoundContent() {
 
 export default function NotFound() {
   return (
-    <>
-      <Suspense fallback={null}>
-        <SearchParamsContent />
-      </Suspense>
+    <Suspense fallback={null}>
+      <SearchParamsContent />
       <NotFoundContent />
-    </>
+    </Suspense>
   )
 } 
