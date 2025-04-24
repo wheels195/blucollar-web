@@ -1,12 +1,7 @@
-'use client'
-
-import { Suspense } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import dynamic from 'next/dynamic'
-import NotFoundPage from './components/NotFoundPage'
 
-const NotFoundContent = () => {
+export default function NotFound() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-20 text-center">
       <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
@@ -22,8 +17,4 @@ const NotFoundContent = () => {
       </Link>
     </div>
   )
-}
-
-export default function NotFound() {
-  return <NotFoundPage />
 } 
