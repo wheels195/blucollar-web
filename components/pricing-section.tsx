@@ -1,9 +1,11 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Check, X, Shield, BarChart } from "lucide-react"
 import { ScrollReveal } from "./scroll-reveal"
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
+import { useInView } from "framer-motion"
 
 const websitePlans = [
   {
@@ -108,82 +110,145 @@ const maintenancePlans = [
 ]
 
 export function PricingSection() {
+  const prefersReducedMotion = useReducedMotion()
+  const [isClient, setIsClient] = useState(false)
+  
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.2,
+        delayChildren: 0,
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: prefersReducedMotion ? { opacity: 0 } : { 
+      opacity: 0,
+      y: 20,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: prefersReducedMotion ? 0.3 : 0.8,
+        ease: [0.25, 0.1, 0, 1],
+      }
+    }
+  }
+
+  if (!isClient) {
+    return null // Prevent SSR flash
+  }
+
   return (
     <section id="pricing" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
               className="mb-4"
             >
               <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
                 Pricing
               </span>
             </motion.div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+            <motion.h2 
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
+            >
               Transparent <span className="gradient-text">Pricing</span>
-            </h2>
-            <p className="text-lg text-foreground/80">
+            </motion.h2>
+            <motion.p 
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="text-lg text-foreground/80"
+            >
               Choose the perfect plan for your business needs with our straightforward pricing options.
-            </p>
+            </motion.p>
           </div>
         </ScrollReveal>
 
         {/* Website Development Plans */}
         <div className="mb-20">
-          <h3 className="text-2xl font-bold text-center mb-10">Website Development</h3>
+          <motion.h3 
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-2xl font-bold text-center mb-10"
+          >
+            Website Development
+          </motion.h3>
           <div className="grid md:grid-cols-3 gap-8">
             {websitePlans.map((plan, index) => (
-              <ScrollReveal key={index} delay={index * 0.1}>
-                <div
-                  className={`relative rounded-xl border ${
-                    plan.popular ? "border-primary" : "border-border"
-                  } bg-background shadow-sm overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-primary/70 hover:z-10`}
-                >
-                  {plan.popular && (
-                    <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-bl-lg">
-                      Most Popular
-                    </div>
-                  )}
-                  <div className="p-6 flex-grow">
-                    <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                    <div className="mb-4">
-                      <span className="text-3xl font-bold">{plan.price}</span>
-                      <span className="text-foreground/60"> /one-time</span>
-                    </div>
-                    <p className="text-foreground/80 mb-6">{plan.description}</p>
-                    <ul className="space-y-3 mb-6">
-                      {plan.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start">
-                          {feature.included ? (
-                            <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-                          ) : (
-                            <X className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
-                          )}
-                          <span className={feature.included ? "" : "text-foreground/50 line-through"}>
-                            {feature.name}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+              <motion.div
+                key={plan.name}
+                variants={itemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                className={`relative rounded-xl border ${
+                  plan.popular ? "border-primary" : "border-border"
+                } bg-background shadow-sm overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-lg hover:border-primary/70 hover:z-10 ${
+                  prefersReducedMotion ? "" : "hover:scale-[1.02]"
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-bl-lg">
+                    Most Popular
                   </div>
-                  <div className="p-6 pt-0">
-                    <Link
-                      href="/contact"
-                      className={`inline-block w-full text-center py-3 px-4 rounded-lg border ${
-                        plan.popular
-                          ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                          : "border-primary/80 text-primary hover:bg-primary/10"
-                      } font-medium transition-colors duration-200`}
-                    >
-                      {plan.cta}
-                    </Link>
+                )}
+                <div className="p-6 flex-grow">
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <div className="mb-4">
+                    <span className="text-3xl font-bold">{plan.price}</span>
+                    <span className="text-foreground/60"> /one-time</span>
                   </div>
+                  <p className="text-foreground/80 mb-6">{plan.description}</p>
+                  <ul className="space-y-3 mb-6">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start">
+                        {feature.included ? (
+                          <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
+                        ) : (
+                          <X className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
+                        )}
+                        <span className={feature.included ? "" : "text-foreground/50 line-through"}>
+                          {feature.name}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </ScrollReveal>
+                <div className="p-6 pt-0">
+                  <Link
+                    href="/contact"
+                    className={`inline-block w-full text-center py-3 px-4 rounded-lg border ${
+                      plan.popular
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                        : "border-primary/80 text-primary hover:bg-primary/10"
+                    } font-medium transition-colors duration-200`}
+                  >
+                    {plan.cta}
+                  </Link>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -191,64 +256,83 @@ export function PricingSection() {
         {/* Monthly Website Support Plans */}
         <div>
           <ScrollReveal>
-            <h3 className="text-2xl font-bold text-center mb-4">Monthly Website Support Plans</h3>
-            <p className="text-center text-foreground/80 max-w-3xl mx-auto mb-10">
+            <motion.h3 
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-2xl font-bold text-center mb-4"
+            >
+              Monthly Website Support Plans
+            </motion.h3>
+            <motion.p 
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-center text-foreground/80 max-w-3xl mx-auto mb-10"
+            >
               Keep your website up-to-date, secure, and performing at its best with our monthly subscription plans.
-            </p>
+            </motion.p>
           </ScrollReveal>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {maintenancePlans.map((plan, index) => (
-              <ScrollReveal key={index} delay={index * 0.1}>
-                <div
-                  className={`relative rounded-xl border ${
-                    plan.popular ? "border-primary" : "border-border"
-                  } bg-background shadow-sm overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-primary/70 hover:z-10`}
-                >
-                  {plan.popular && (
-                    <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-bl-lg">
-                      Recommended
-                    </div>
-                  )}
-                  <div className="p-6 flex-grow">
-                    <div className="flex items-center mb-4">
-                      <div className="bg-primary/10 p-2 rounded-full mr-3">{plan.icon}</div>
-                      <h3 className="text-xl font-bold">{plan.name}</h3>
-                    </div>
-                    <div className="mb-4">
-                      <span className="text-3xl font-bold">{plan.price}</span>
-                      <span className="text-foreground/60">{plan.period}</span>
-                    </div>
-                    <p className="text-foreground/80 mb-6">{plan.description}</p>
-                    <ul className="space-y-3 mb-6">
-                      {plan.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start">
-                          <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                      {plan.notIncluded.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start">
-                          <X className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
-                          <span className="text-foreground/50 line-through">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+              <motion.div
+                key={plan.name}
+                variants={itemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                className={`relative rounded-xl border ${
+                  plan.popular ? "border-primary" : "border-border"
+                } bg-background shadow-sm overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-lg hover:border-primary/70 hover:z-10 ${
+                  prefersReducedMotion ? "" : "hover:scale-[1.02]"
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-bl-lg">
+                    Recommended
                   </div>
-                  <div className="p-6 pt-0">
-                    <Link
-                      href="/contact"
-                      className={`inline-block w-full text-center py-3 px-4 rounded-lg border ${
-                        plan.popular
-                          ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                          : "border-primary/80 text-primary hover:bg-primary/10"
-                      } font-medium transition-colors duration-200`}
-                    >
-                      Subscribe
-                    </Link>
+                )}
+                <div className="p-6 flex-grow">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-primary/10 p-2 rounded-full mr-3">{plan.icon}</div>
+                    <h3 className="text-xl font-bold">{plan.name}</h3>
                   </div>
+                  <div className="mb-4">
+                    <span className="text-3xl font-bold">{plan.price}</span>
+                    <span className="text-foreground/60">{plan.period}</span>
+                  </div>
+                  <p className="text-foreground/80 mb-6">{plan.description}</p>
+                  <ul className="space-y-3 mb-6">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start">
+                        <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                    {plan.notIncluded.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start">
+                        <X className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
+                        <span className="text-foreground/50 line-through">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </ScrollReveal>
+                <div className="p-6 pt-0">
+                  <Link
+                    href="/contact"
+                    className={`inline-block w-full text-center py-3 px-4 rounded-lg border ${
+                      plan.popular
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                        : "border-primary/80 text-primary hover:bg-primary/10"
+                    } font-medium transition-colors duration-200`}
+                  >
+                    Subscribe
+                  </Link>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
