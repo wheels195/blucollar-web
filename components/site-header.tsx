@@ -125,7 +125,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-50 bg-background md:hidden"
+            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-lg md:hidden"
           >
             <div className="flex flex-col h-full p-6">
               <div className="flex justify-between items-center mb-8">
