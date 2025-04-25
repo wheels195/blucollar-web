@@ -154,3 +154,36 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+.perspective-1000 {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%) rotateY(45deg) rotateX(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotateY(15deg) rotateX(5deg);
+  }
+}
+
+@keyframes wordDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

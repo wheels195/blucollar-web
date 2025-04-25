@@ -2,165 +2,123 @@
 
 import { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Code2, Paintbrush, Laptop, Blocks } from "lucide-react"
 import Link from "next/link"
-import { StaggeredText } from "./staggered-text"
+import { HeroMockup } from "./hero-mockup"
+
+const FloatingIcon = ({ icon: Icon, className, delay }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 0.5, y: 0 }}
+    transition={{
+      duration: 2,
+      delay,
+      repeat: Infinity,
+      repeatType: "reverse",
+    }}
+    className={`absolute hidden sm:block text-white/20 ${className}`}
+  >
+    <Icon size={24} />
+  </motion.div>
+)
 
 export function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null)
-  const [animationComplete, setAnimationComplete] = useState(false)
-
-  // Trigger animations after initial load
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimationComplete(true)
-    }, 1500)
-
-    return () => clearTimeout(timer)
-  }, [])
 
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[80vh] flex flex-col items-center justify-start pt-24 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-start pt-16 overflow-hidden"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/30 -z-10" />
+      {/* Enhanced background with animated gradient mesh */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/30 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),rgba(255,255,255,0))]" />
+      </div>
 
       {/* Animated background elements */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-2/3 left-1/3 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/3 right-1/4 w-[32rem] h-[32rem] bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-2/3 left-1/3 w-[28rem] h-[28rem] bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-2000" />
       </div>
 
-      <div className="container mx-auto px-4 text-center">
-        <div className="flex flex-col items-center max-w-4xl mx-auto">
-          {/* Text content */}
+      {/* Floating tech icons */}
+      <FloatingIcon icon={Code2} className="top-32 left-[15%]" delay={0} />
+      <FloatingIcon icon={Paintbrush} className="top-48 right-[20%]" delay={0.5} />
+      <FloatingIcon icon={Laptop} className="bottom-32 left-[20%]" delay={1} />
+      <FloatingIcon icon={Blocks} className="bottom-48 right-[15%]" delay={1.5} />
+
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col items-center max-w-6xl mx-auto">
+          {/* Title with blur animation */}
           <motion.div
-            className="flex flex-col items-center text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: animationComplete ? 1 : 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-center mb-6"
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.1, ease: "easeOut" }}
           >
-            {/* Staggered text headline - appears after animation */}
-            <div className="mb-6">
-              <motion.span
-                className="inline-block px-3 py-1 text-sm font-medium text-primary bg-primary/10 rounded-full mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: animationComplete ? 1 : 0,
-                  y: animationComplete ? 0 : 20,
-                }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                Web Design & Development
-              </motion.span>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
-                {/* Slower, more dramatic title animation */}
-                <StaggeredText
-                  text="BluCollar Web"
-                  className="gradient-text block"
-                  delay={0.8} // Increased delay
-                  staggerDuration={0.08} // Slower stagger between letters
-                  springConfig={{
-                    damping: 8, // Lower damping for more oscillation
-                    stiffness: 70, // Lower stiffness for slower movement
-                    mass: 1.2, // Higher mass for more momentum
-                  }}
-                />
-                {/* Fixed subtitle to prevent word breaks */}
-                <span className="block">
-                  <StaggeredText
-                    text="Websites for the"
-                    delay={2.2} // Longer delay after first line
-                    staggerDuration={0.06} // Slightly faster than first line but still slow
-                    springConfig={{
-                      damping: 10,
-                      stiffness: 80,
-                      mass: 1.1,
-                    }}
-                  />
-                </span>
-                <span className="block">
-                  <StaggeredText
-                    text="Everyday Businesses"
-                    delay={2.8} // Longer delay after first line
-                    staggerDuration={0.06} // Slightly faster than first line but still slow
-                    springConfig={{
-                      damping: 10,
-                      stiffness: 80,
-                      mass: 1.1,
-                    }}
-                  />
-                </span>
-              </h1>
-              <motion.p
-                className="text-lg text-foreground/80 max-w-xl mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: animationComplete ? 1 : 0,
-                  y: animationComplete ? 0 : 20,
-                }}
-                transition={{ duration: 0.8, delay: 3.5 }} // Increased delay
-              >
-                We create modern, minimal, and high-performance websites that elevate your brand and drive results.
-              </motion.p>
-            </div>
-
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: animationComplete ? 1 : 0,
-                y: animationComplete ? 0 : 20,
-              }}
-              transition={{ duration: 0.8, delay: 4 }} // Increased delay
-              className="flex flex-col sm:flex-row gap-4 mb-8"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="mb-4"
             >
-              <Link
-                href="#contact"
-                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full text-white bg-primary hover:bg-primary/90 transition-all duration-200 transform hover:scale-105"
-              >
-                Get a Free Quote
-                <ArrowRight size={18} className="ml-2" />
-              </Link>
+              <span className="px-4 py-1 text-lg bg-[#1d4ed8]/10 rounded-full text-[#3b82f6]">
+                Website Design
+              </span>
             </motion.div>
-
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-medium tracking-[0.02em] text-white [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)]">
+              BluCollar Web
+            </h1>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: animationComplete ? 1 : 0,
-              }}
-              transition={{ duration: 0.8, delay: 4.2 }} // Increased delay
-              className="flex items-center gap-4 pt-4"
+              className="h-[2px] bg-gradient-to-r from-white/10 via-white to-white/10 mt-6 mx-auto max-w-[80%]"
+              initial={{ width: "0%", opacity: 0 }}
+              animate={{ width: "100%", opacity: 1 }}
+              transition={{ delay: 1.3, duration: 1.2, ease: [0.43, 0.13, 0.23, 0.96] }}
+            />
+
+            {/* Secondary tagline */}
+            <motion.p
+              className="mt-6 text-lg sm:text-xl text-white/80 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.8 }}
             >
-              <div className="flex -space-x-2">
-                {[...Array(3)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-primary ring-2 ring-background"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm text-foreground/60">
-                Guaranteed to provide you and your customers with the best experience
-              </p>
-            </motion.div>
+              Transform your business with a professional online presence that stands out from the competition
+            </motion.p>
+          </motion.div>
+
+          {/* Hero Mockup */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.1 }}
+            className="w-full scale-125 mb-20"
+          >
+            <HeroMockup />
+          </motion.div>
+
+          {/* Enhanced CTA section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 4.7 }}
+            className="flex flex-col sm:flex-row gap-4 mt-8 items-center"
+          >
+            <Link
+              href="#contact"
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium rounded-full text-white bg-primary hover:bg-primary/90 transition-all duration-200 transform hover:scale-105"
+            >
+              Get a Free Quote
+              <ArrowRight size={20} className="ml-2" />
+            </Link>
+            <span className="text-white/60">or</span>
+            <Link
+              href="#gallery"
+              className="text-white/90 hover:text-white underline underline-offset-4 transition-colors"
+            >
+              View Our Work
+            </Link>
           </motion.div>
         </div>
       </div>
