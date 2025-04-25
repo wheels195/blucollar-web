@@ -4,7 +4,6 @@ import { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { SpiderwebAnimation } from "./spiderweb-animation"
 import { StaggeredText } from "./staggered-text"
 
 export function HeroSection() {
@@ -35,13 +34,8 @@ export function HeroSection() {
         <div className="absolute top-2/3 left-1/3 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <div className="container px-4 flex-1 flex items-center">
         <div className="flex flex-col items-center">
-          {/* Spiderweb animation - appears first and takes up more space */}
-          <div className="w-full">
-            <SpiderwebAnimation />
-          </div>
-
           {/* Text content */}
           <motion.div
             className="flex flex-col items-center text-center"
