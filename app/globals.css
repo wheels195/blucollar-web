@@ -126,18 +126,34 @@ body {
 
 @keyframes float {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(var(--tw-rotate));
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-10px) rotate(var(--tw-rotate));
   }
   100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(var(--tw-rotate));
   }
 }
 
-.float {
-  animation: float 6s ease-in-out infinite;
+@keyframes float-delayed {
+  0% {
+    transform: translateY(-10px) rotate(var(--tw-rotate));
+  }
+  50% {
+    transform: translateY(0px) rotate(var(--tw-rotate));
+  }
+  100% {
+    transform: translateY(-10px) rotate(var(--tw-rotate));
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 4s ease-in-out infinite;
 }
 
 .sticky-cta {
@@ -185,5 +201,154 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Custom cursor effects */
+.custom-cursor {
+  @apply fixed w-8 h-8 pointer-events-none z-50 mix-blend-difference;
+  border-radius: 50%;
+  background: var(--cursor-color);
+  transition: transform 0.2s ease;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+.custom-cursor.hover {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+/* Grid background pattern */
+.design-grid {
+  background-size: 30px 30px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+/* Enhanced hover effects */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+}
+
+/* Advanced animations */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 8s linear infinite;
+}
+
+/* Glass morphism effects */
+.glass-panel {
+  @apply backdrop-blur-lg bg-white/5 border border-white/10;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient animations */
+.gradient-border {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+      45deg,
+      #3b82f6,
+      #60a5fa,
+      #93c5fd,
+      #60a5fa,
+      #3b82f6
+    );
+    border-radius: inherit;
+    z-index: -1;
+    animation: border-rotate 4s linear infinite;
+  }
+}
+
+@keyframes border-rotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Enhanced hover effects */
+.hover-glow {
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    transform: translateY(-2px);
+  }
+}
+
+/* Animated background patterns */
+.animated-grid {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  animation: grid-move 15s linear infinite;
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+/* Text effects */
+.text-gradient-animate {
+  background: linear-gradient(
+    90deg,
+    #3b82f6,
+    #60a5fa,
+    #93c5fd,
+    #60a5fa,
+    #3b82f6
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: text-gradient 8s linear infinite;
+}
+
+@keyframes text-gradient {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
   }
 }

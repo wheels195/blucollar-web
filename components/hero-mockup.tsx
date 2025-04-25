@@ -53,6 +53,10 @@ export function HeroMockup() {
   const AnimatedWord = ({ children, className = "" }) => (
     <motion.span
       variants={wordVariants}
+      whileHover={className.includes('text-blue') ? {
+        scale: 1.05,
+        transition: { duration: 0.2 }
+      } : {}}
       className={`inline-block mr-3 ${className}`}
     >
       {children}
