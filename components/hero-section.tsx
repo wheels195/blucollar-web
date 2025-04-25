@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
-// Updated for deployment: April 25, 2024
+// Updated for deployment: April 25, 2024 - Force update with all 4 sections
 
 export function HeroSection() {
   const containerVariants = {
