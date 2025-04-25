@@ -5,6 +5,8 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
+// Updated for deployment: April 25, 2024
+
 export function HeroSection() {
   const containerVariants = {
     hidden: { opacity: 0 },
