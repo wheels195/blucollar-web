@@ -53,7 +53,7 @@ export function HeroMockup() {
   const AnimatedWord = ({ children, className = "" }) => (
     <motion.span
       variants={wordVariants}
-      className={`inline-block mr-2 ${className}`}
+      className={`inline-block mr-3 ${className}`}
     >
       {children}
     </motion.span>
@@ -75,12 +75,12 @@ export function HeroMockup() {
           className="bg-black/40 backdrop-blur rounded-xl p-8 mb-8"
           variants={panelVariants}
         >
-          <h2 className="text-3xl md:text-4xl font-bold leading-relaxed">
-            <AnimatedWord>Websites</AnimatedWord>
-            <AnimatedWord>for</AnimatedWord>
-            <AnimatedWord>the</AnimatedWord>
-            <AnimatedWord className="text-blue-400">Everyday</AnimatedWord>
-            <AnimatedWord className="text-purple-400">Business</AnimatedWord>
+          <h2 className="text-3xl md:text-4xl font-medium leading-relaxed">
+            <AnimatedWord className="text-blue-400/90 italic mr-3">Websites</AnimatedWord>
+            <AnimatedWord className="mr-3">for</AnimatedWord>
+            <AnimatedWord className="mr-3">the</AnimatedWord>
+            <AnimatedWord className="mr-3">Everyday</AnimatedWord>
+            <AnimatedWord>Business.</AnimatedWord>
           </h2>
         </motion.div>
 
@@ -88,21 +88,13 @@ export function HeroMockup() {
           className="bg-black/40 backdrop-blur rounded-xl p-8 mb-8"
           variants={panelVariants}
         >
-          <p className="text-xl leading-relaxed">
-            <AnimatedWord>We</AnimatedWord>
-            <AnimatedWord>create</AnimatedWord>
-            <AnimatedWord className="text-emerald-400">modern,</AnimatedWord>
-            <AnimatedWord className="text-amber-400">minimal,</AnimatedWord>
-            <AnimatedWord>and</AnimatedWord>
-            <AnimatedWord className="text-rose-400">high-performance</AnimatedWord>
-            <AnimatedWord>websites</AnimatedWord>
-            <AnimatedWord>that</AnimatedWord>
-            <AnimatedWord className="text-cyan-400">elevate</AnimatedWord>
-            <AnimatedWord className="text-cyan-400">your</AnimatedWord>
-            <AnimatedWord className="text-cyan-400">brand</AnimatedWord>
-            <AnimatedWord>and</AnimatedWord>
-            <AnimatedWord className="text-indigo-400">drive</AnimatedWord>
-            <AnimatedWord className="text-indigo-400">results.</AnimatedWord>
+          <p className="text-3xl md:text-4xl font-medium leading-relaxed">
+            <AnimatedWord className="mr-3">Delivers</AnimatedWord>
+            <AnimatedWord className="mr-3">the</AnimatedWord>
+            <AnimatedWord className="mr-3">experience</AnimatedWord>
+            <AnimatedWord className="text-blue-400/90 italic mr-3">your</AnimatedWord>
+            <AnimatedWord className="text-blue-400/90 italic mr-3">customers</AnimatedWord>
+            <AnimatedWord>expect.</AnimatedWord>
           </p>
         </motion.div>
 
@@ -110,18 +102,14 @@ export function HeroMockup() {
           className="bg-black/40 backdrop-blur rounded-xl p-8"
           variants={panelVariants}
         >
-          <p className="text-xl leading-relaxed">
-            <AnimatedWord className="text-green-400">Guaranteed</AnimatedWord>
-            <AnimatedWord>to</AnimatedWord>
-            <AnimatedWord>provide</AnimatedWord>
-            <AnimatedWord>you</AnimatedWord>
-            <AnimatedWord>and</AnimatedWord>
-            <AnimatedWord>your</AnimatedWord>
-            <AnimatedWord>customers</AnimatedWord>
-            <AnimatedWord>with</AnimatedWord>
-            <AnimatedWord>the</AnimatedWord>
-            <AnimatedWord className="text-orange-400">best</AnimatedWord>
-            <AnimatedWord className="text-orange-400">experience.</AnimatedWord>
+          <p className="text-3xl md:text-4xl font-medium leading-relaxed">
+            <AnimatedWord>Your</AnimatedWord>
+            <AnimatedWord className="mr-0">business.</AnimatedWord>
+            <AnimatedWord className="mx-3">Their</AnimatedWord>
+            <AnimatedWord className="text-blue-400/90 italic mr-0">experience.</AnimatedWord>
+            <AnimatedWord className="mx-3">Nailed</AnimatedWord>
+            <AnimatedWord className="mr-3">every</AnimatedWord>
+            <AnimatedWord>time.</AnimatedWord>
           </p>
         </motion.div>
       </motion.div>

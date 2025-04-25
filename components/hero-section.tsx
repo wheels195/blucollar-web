@@ -102,7 +102,7 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 4.7 }}
+            transition={{ duration: 0.8, delay: 6.2 }}
             className="flex flex-col sm:flex-row gap-4 mt-8 items-center"
           >
             <Link
