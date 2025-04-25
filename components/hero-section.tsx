@@ -14,7 +14,7 @@ export function HeroSection() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setAnimationComplete(true)
-    }, 1500) // Shorter delay to start text animations sooner after web appears
+    }, 1500)
 
     return () => clearTimeout(timer)
   }, [])
@@ -22,7 +22,7 @@ export function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex flex-col items-center justify-start pt-16 overflow-hidden"
+      className="relative min-h-[80vh] flex flex-col items-center justify-start pt-24 overflow-hidden"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/30 -z-10" />
@@ -34,8 +34,8 @@ export function HeroSection() {
         <div className="absolute top-2/3 left-1/3 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="container px-4 flex-1 flex items-center">
-        <div className="flex flex-col items-center">
+      <div className="container mx-auto px-4 text-center">
+        <div className="flex flex-col items-center max-w-4xl mx-auto">
           {/* Text content */}
           <motion.div
             className="flex flex-col items-center text-center"
