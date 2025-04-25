@@ -3,6 +3,7 @@
 import { Check, X, Shield, BarChart } from "lucide-react"
 import { ScrollReveal } from "./scroll-reveal"
 import Link from "next/link"
+import { motion } from "framer-motion"
 
 const websitePlans = [
   {
@@ -112,9 +113,16 @@ export function PricingSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block px-3 py-1 text-sm font-medium text-primary bg-primary/10 rounded-full mb-4">
-              Pricing
-            </span>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-4"
+            >
+              <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
+                Pricing
+              </span>
+            </motion.div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
               Transparent <span className="gradient-text">Pricing</span>
             </h2>

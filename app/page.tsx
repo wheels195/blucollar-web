@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import { motion, useScroll, useSpring } from "framer-motion"
 import { HeroSection } from "@/components/hero-section"
+import { TrustSection } from "@/components/trust-section"
 import { ServicesSection } from "@/components/services-section"
 import { ProcessSection } from "@/components/process-section"
 import { GallerySection } from "@/components/gallery-section"
@@ -68,6 +69,7 @@ export default function Home() {
 
       <div id="top">
         <HeroSection />
+        <TrustSection />
       </div>
 
       <motion.div

@@ -3,6 +3,7 @@ import { ScrollReveal } from "./scroll-reveal"
 import { Code, Layout, Zap, Search, Smartphone, BarChart } from "lucide-react"
 import { Button } from "./ui/button"
 import { ArrowRight } from "lucide-react"
+import { motion } from "framer-motion"
 
 const services = [
   {
@@ -43,9 +44,16 @@ export function ServicesSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block px-3 py-1 text-sm font-medium text-primary bg-primary/10 rounded-full mb-4">
-              Our Services
-            </span>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-4"
+            >
+              <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
+                Our Services
+              </span>
+            </motion.div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
               Our <span className="gradient-text">Services</span>
             </h2>

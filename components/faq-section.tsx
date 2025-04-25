@@ -3,6 +3,7 @@
 import { ScrollReveal } from "./scroll-reveal"
 import { Plus, Minus } from "lucide-react"
 import { useState } from "react"
+import { motion } from "framer-motion"
 
 interface FAQItem {
   question: string
@@ -189,9 +190,16 @@ export function FAQSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block px-3 py-1 text-sm font-medium text-primary bg-primary/10 rounded-full mb-4">
-              FAQ
-            </span>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-4"
+            >
+              <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
+                FAQ
+              </span>
+            </motion.div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
               Frequently Asked <span className="gradient-text">Questions</span>
             </h2>

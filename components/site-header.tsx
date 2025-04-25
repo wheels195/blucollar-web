@@ -8,6 +8,7 @@ import { AnimatedLogo } from "./animated-logo"
 
 const navItems = [
   { name: "Home", href: "/#top" },
+  { name: "Why Us", href: "/#why-us" },
   { name: "Our Services", href: "/#services" },
   { name: "Gallery", href: "/#gallery" },
   { name: "Our Process", href: "/#process" },
@@ -29,7 +30,7 @@ export function SiteHeader() {
       const scrollPosition = window.scrollY + window.innerHeight / 3
 
       // Find which section we're in
-      const sections = ["top", "services", "gallery", "process", "pricing", "faq", "contact"]
+      const sections = ["top", "why-us", "services", "gallery", "process", "pricing", "faq", "contact"]
       let currentSection = sections[0]
 
       for (const section of sections) {
