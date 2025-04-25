@@ -64,9 +64,9 @@ export function HeroMockup() {
   )
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto mt-20" style={{ perspective: "2000px" }}>
+    <div className="relative w-full max-w-5xl mx-auto mt-20 px-4 sm:px-0" style={{ perspective: "2000px" }}>
       <motion.div
-        className="w-full bg-black/20 backdrop-blur-sm rounded-2xl p-12 shadow-2xl"
+        className="w-full bg-black/20 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-2xl"
         style={{
           transform: "rotate3d(5, -8, 0, 30deg)",
           transformOrigin: "center center",
@@ -107,11 +107,11 @@ export function HeroMockup() {
           variants={panelVariants}
         >
           <p className="text-3xl md:text-4xl font-medium leading-relaxed">
-            <AnimatedWord>Your</AnimatedWord>
-            <AnimatedWord className="mr-0">business.</AnimatedWord>
-            <AnimatedWord className="mx-3">Their</AnimatedWord>
-            <AnimatedWord className="text-blue-400/90 italic mr-0">experience.</AnimatedWord>
-            <AnimatedWord className="mx-3">Nailed</AnimatedWord>
+            <AnimatedWord className="mr-3">Your</AnimatedWord>
+            <AnimatedWord className="mr-3">business.</AnimatedWord>
+            <AnimatedWord className="mr-3">Their</AnimatedWord>
+            <AnimatedWord className="text-blue-400/90 italic mr-3">experience.</AnimatedWord>
+            <AnimatedWord className="mr-3">Perfect</AnimatedWord>
             <AnimatedWord className="mr-3">every</AnimatedWord>
             <AnimatedWord>time.</AnimatedWord>
           </p>

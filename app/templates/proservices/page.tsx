@@ -6,8 +6,8 @@ import { Card, CardContent } from "@/components/ui/card"
 
 export default function ProServicesTemplate() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-900">
-      <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-gray-900/80 backdrop-blur-md">
+    <div className="flex flex-col min-h-screen bg-black">
+      <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-black/80 backdrop-blur-md">
         <div className="container flex h-16 items-center">
           <div className="mr-auto">
             <Link
@@ -24,7 +24,8 @@ export default function ProServicesTemplate() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="py-12 md:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_40%_at_50%_60%,rgba(30,64,175,0.15),transparent)]"></div>
+          <div className="absolute inset-0 -z-10 bg-[#000000]"></div>
+          <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:48px_48px]"></div>
           <div className="container px-4 md:px-6">
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
               <div className="flex flex-col justify-center space-y-6">

@@ -85,7 +85,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 8 }}
-        className="fixed left-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-20"
+        className="absolute left-6 top-[40%] flex flex-col gap-3 z-20"
       >
         <DesignTip
           icon={Eye}
@@ -188,8 +188,8 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 6.2 }}
             >
               <Link
-                href="#contact"
-                className="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-medium rounded-full text-white bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-xl shadow-primary/25 hover:shadow-primary/50"
+                href="/#contact"
+                className="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-medium rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-300 shadow-xl shadow-primary/25 hover:shadow-primary/50 cursor-pointer"
               >
                 <span className="relative z-10 flex items-center">
                   Get a Free Quote
@@ -199,26 +199,6 @@ export function HeroSection() {
                 </span>
               </Link>
             </motion.div>
-
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 6.3 }}
-              className="text-white/60 select-none"
-            >
-              or
-            </motion.span>
-
-            <motion.a
-              href="#gallery"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 6.4 }}
-              className="group flex items-center text-lg text-white/60 hover:text-white/90 transition-colors duration-300 cursor-pointer"
-            >
-              View Our Work
-              <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-            </motion.a>
           </div>
 
           {/* Design Process Preview */}

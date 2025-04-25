@@ -71,23 +71,13 @@ export default function Home() {
       </div>
 
       <motion.div
-        id="templates"
+        id="services"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={sectionVariants}
       >
         <ServicesSection />
-      </motion.div>
-
-      <motion.div
-        id="process"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
-        <ProcessSection />
       </motion.div>
 
       <motion.div
@@ -98,6 +88,16 @@ export default function Home() {
         variants={sectionVariants}
       >
         <GallerySection />
+      </motion.div>
+
+      <motion.div
+        id="process"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
+        <ProcessSection />
       </motion.div>
 
       <motion.div

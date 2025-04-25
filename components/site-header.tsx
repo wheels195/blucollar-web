@@ -8,8 +8,9 @@ import { AnimatedLogo } from "./animated-logo"
 
 const navItems = [
   { name: "Home", href: "/#top" },
-  { name: "Our Process", href: "/#process" },
+  { name: "Our Services", href: "/#services" },
   { name: "Gallery", href: "/#gallery" },
+  { name: "Our Process", href: "/#process" },
   { name: "Pricing", href: "/#pricing" },
   { name: "FAQ", href: "/#faq" },
   { name: "Contact", href: "/#contact" },
@@ -24,25 +25,24 @@ export function SiteHeader() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
 
-      // Find the section that takes up most of the viewport
-      const sections = ["contact", "faq", "pricing", "gallery", "process", "top"]
-      let maxVisibleSection = "top"
-      let maxVisibleHeight = 0
+      // Get the current scroll position
+      const scrollPosition = window.scrollY + window.innerHeight / 3
 
-      sections.forEach(section => {
+      // Find which section we're in
+      const sections = ["top", "services", "gallery", "process", "pricing", "faq", "contact"]
+      let currentSection = sections[0]
+
+      for (const section of sections) {
         const element = document.getElementById(section)
         if (element) {
-          const rect = element.getBoundingClientRect()
-          const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)
-          
-          if (visibleHeight > maxVisibleHeight) {
-            maxVisibleHeight = visibleHeight
-            maxVisibleSection = section
+          const offsetTop = element.offsetTop
+          if (scrollPosition >= offsetTop) {
+            currentSection = section
           }
         }
-      })
+      }
 
-      setActiveSection(maxVisibleSection)
+      setActiveSection(currentSection)
     }
 
     window.addEventListener("scroll", handleScroll)
