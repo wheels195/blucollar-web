@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect } from "react"
-import { motion, useScroll, useSpring } from "framer-motion"
+import { useEffect, useRef } from "react"
+import { motion, useScroll, useSpring, useInView } from "framer-motion"
 import { HeroSection } from "@/components/hero-section"
 import { TrustSection } from "@/components/trust-section"
 import { ServicesSection } from "@/components/services-section"
@@ -16,45 +16,74 @@ import { TechTicker } from "@/components/tech-ticker"
 
 // Animation variants for sections
 const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 20 }, // Reduced y offset for smoother animation
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
+      duration: 0.5, // Faster animation
       ease: "easeOut",
     },
   },
 }
 
+// Section wrapper component for optimized loading
+function Section({ id, children, priority = false }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { 
+    once: true,
+    margin: "50% 0px -10% 0px", // Start loading earlier
+    amount: priority ? 0 : 0.1 // Lower threshold for non-priority sections
+  })
+
+  return (
+    <motion.div
+      id={id}
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={sectionVariants}
+      className="will-change-transform"
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 export default function Home() {
-  // Smooth scrolling setup
-  const { scrollYProgress } = useScroll()
+  const { scrollYProgress } = useScroll({
+    tolerance: 0.2, // Add tolerance for smoother progress bar
+  })
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
+    mass: 0.5 // Lighter mass for smoother animation
   })
 
-  // Fix scrolling issues
   useEffect(() => {
     // Ensure smooth scrolling
     document.documentElement.style.scrollBehavior = "smooth"
 
-    // Fix for mobile devices
+    // Optimize for mobile
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     if (isMobile) {
       document.body.classList.add("no-custom-cursor")
+      // Disable smooth scrolling on mobile for better performance
+      document.documentElement.style.scrollBehavior = "auto"
     }
 
-    // Fix for scrolling issues
-    document.body.style.overflow = "auto"
-    document.documentElement.style.overflow = "auto"
+    // Enable passive scroll listeners
+    const opts = { passive: true }
+    document.addEventListener('touchstart', () => {}, opts)
+    document.addEventListener('touchmove', () => {}, opts)
 
     return () => {
       document.body.style.overflow = ""
       document.documentElement.style.overflow = ""
       document.documentElement.style.scrollBehavior = ""
+      document.removeEventListener('touchstart', () => {})
+      document.removeEventListener('touchmove', () => {})
     }
   }, [])
 
@@ -68,72 +97,40 @@ export default function Home() {
 
       <SiteHeader />
 
-      <div id="top">
+      {/* Priority sections (above the fold) */}
+      <Section id="top" priority>
         <HeroSection />
         <TrustSection />
-      </div>
+      </Section>
 
-      <TechTicker />
+      <Section id="tech" priority>
+        <TechTicker />
+      </Section>
 
-      <motion.div
-        id="services"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      {/* Regular sections */}
+      <Section id="services">
         <ServicesSection />
-      </motion.div>
+      </Section>
 
-      <motion.div
-        id="gallery"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <Section id="gallery">
         <GallerySection />
-      </motion.div>
+      </Section>
 
-      <motion.div
-        id="process"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <Section id="process">
         <ProcessSection />
-      </motion.div>
+      </Section>
 
-      <motion.div
-        id="pricing"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <Section id="pricing">
         <PricingSection />
-      </motion.div>
+      </Section>
 
-      <motion.div
-        id="faq"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <Section id="faq">
         <FAQSection />
-      </motion.div>
+      </Section>
 
-      <motion.div
-        id="contact"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <Section id="contact">
         <ContactSection />
-      </motion.div>
+      </Section>
 
       <SiteFooter />
     </main>
