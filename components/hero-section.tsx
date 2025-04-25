@@ -155,7 +155,7 @@ export function HeroSection() {
               business: "Bright Smile Dental"
             },
             {
-              image: "./images/hero/pool.png",
+              image: "/images/hero/pool.png",
               alt: "Professional pool cleaning service",
               tagline: "Service Contracts Up 75% This Season",
               business: "Crystal Clear Pools"
