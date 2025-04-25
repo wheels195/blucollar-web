@@ -12,6 +12,7 @@ import { FAQSection } from "@/components/faq-section"
 import { ContactSection } from "@/components/contact-section"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { TechTicker } from "@/components/tech-ticker"
 
 // Animation variants for sections
 const sectionVariants = {
@@ -71,6 +72,8 @@ export default function Home() {
         <HeroSection />
         <TrustSection />
       </div>
+
+      <TechTicker />
 
       <motion.div
         id="services"
