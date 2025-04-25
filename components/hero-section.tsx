@@ -103,7 +103,7 @@ export function HeroSection() {
         initial="hidden"
         animate="visible"
       >
-        <div className="text-center max-w-4xl mx-auto mb-12">
+        <div className="text-center max-w-4xl mx-auto mb-16">
           <motion.h1 
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
             variants={headlineVariants}
@@ -132,7 +132,7 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-[95rem] mx-auto">
           {[
             {
               image: "/images/hero/landscaper.png",
@@ -151,6 +151,12 @@ export function HeroSection() {
               alt: "Modern dental practice interior",
               tagline: "New Patients Up 40% This Quarter",
               business: "Bright Smile Dental"
+            },
+            {
+              image: "./images/hero/pool.png",
+              alt: "Professional pool cleaning service",
+              tagline: "Service Contracts Up 75% This Season",
+              business: "Crystal Clear Pools"
             }
           ].map((item, index) => (
             <motion.div
@@ -159,19 +165,28 @@ export function HeroSection() {
               custom={index}
               variants={imageVariants}
             >
-              <div className="aspect-[3/5] relative">
-                <Image 
-                  src={item.image}
-                  alt={item.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-                  priority={index === 0}
-                />
+              <div className="aspect-[3/4] relative">
+                {item.business === "Crystal Clear Pools" ? (
+                  <img 
+                    src="/images/hero/pool.png"
+                    alt="Professional pool cleaning service"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                  />
+                ) : (
+                  <Image 
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    quality={100}
+                    priority={true}
+                    sizes="(max-width: 640px) 95vw, (max-width: 1024px) 45vw, 23vw"
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/0 transition-opacity duration-500 group-hover:from-black/90" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform transition-transform duration-500">
-                  <p className="text-lg font-medium mb-2 transform transition-transform duration-500 group-hover:translate-y-[-4px]">{item.tagline}</p>
-                  <p className="text-sm text-white/80 transform transition-transform duration-500 group-hover:translate-y-[-4px]">{item.business}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white transform transition-transform duration-500">
+                  <p className="text-lg sm:text-xl font-medium mb-2 sm:mb-3 transform transition-transform duration-500 group-hover:translate-y-[-4px]">{item.tagline}</p>
+                  <p className="text-sm sm:text-base text-white/80 transform transition-transform duration-500 group-hover:translate-y-[-4px]">{item.business}</p>
                 </div>
               </div>
             </motion.div>
