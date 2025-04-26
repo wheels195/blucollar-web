@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useSpring, useInView } from "framer-motion"
 import { HeroSection } from "@/components/hero-section"
 import { TrustSection } from "@/components/trust-section"
@@ -62,12 +62,21 @@ export default function Home() {
     restDelta: 0.001
   })
 
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const checkMobile = () => setIsMobile(window.innerWidth < 768)
+      checkMobile()
+      window.addEventListener('resize', checkMobile)
+      return () => window.removeEventListener('resize', checkMobile)
+    }
+  }, [])
+
   useEffect(() => {
     // Ensure smooth scrolling
     document.documentElement.style.scrollBehavior = "smooth"
 
     // Optimize for mobile
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     if (isMobile) {
       document.body.classList.add("no-custom-cursor")
       // Disable smooth scrolling on mobile for better performance
@@ -86,7 +95,7 @@ export default function Home() {
       document.removeEventListener('touchstart', () => {})
       document.removeEventListener('touchmove', () => {})
     }
-  }, [])
+  }, [isMobile])
 
   return (
     <main className="min-h-screen relative">
@@ -98,49 +107,67 @@ export default function Home() {
 
       <SiteHeader />
 
-      {/* Priority sections (above the fold) */}
-      <Section id="top" priority>
-        <HeroSection />
-      </Section>
+      {isMobile ? (
+        <>
+          <HeroSection />
+          <TrustSection />
+          <TechTicker />
+          <ServicesSection />
+          <PortfolioSection />
+          <GallerySection />
+          <ProcessSection />
+          <PricingSection />
+          <FAQSection />
+          <ContactSection />
+          <SiteFooter />
+        </>
+      ) : (
+        <>
+          {/* Priority sections (above the fold) */}
+          <Section id="top" priority>
+            <HeroSection />
+          </Section>
 
-      <Section id="trust" priority>
-        <TrustSection />
-      </Section>
+          <Section id="trust" priority>
+            <TrustSection />
+          </Section>
 
-      <Section id="tech">
-        <TechTicker />
-      </Section>
+          <Section id="tech">
+            <TechTicker />
+          </Section>
 
-      {/* Regular sections */}
-      <Section id="services">
-        <ServicesSection />
-      </Section>
+          {/* Regular sections */}
+          <Section id="services">
+            <ServicesSection />
+          </Section>
 
-      <Section id="portfolio">
-        <PortfolioSection />
-      </Section>
+          <Section id="portfolio">
+            <PortfolioSection />
+          </Section>
 
-      <Section id="gallery">
-        <GallerySection />
-      </Section>
+          <Section id="gallery">
+            <GallerySection />
+          </Section>
 
-      <Section id="process">
-        <ProcessSection />
-      </Section>
+          <Section id="process">
+            <ProcessSection />
+          </Section>
 
-      <Section id="pricing">
-        <PricingSection />
-      </Section>
+          <Section id="pricing">
+            <PricingSection />
+          </Section>
 
-      <Section id="faq">
-        <FAQSection />
-      </Section>
+          <Section id="faq">
+            <FAQSection />
+          </Section>
 
-      <Section id="contact">
-        <ContactSection />
-      </Section>
+          <Section id="contact">
+            <ContactSection />
+          </Section>
 
-      <SiteFooter />
+          <SiteFooter />
+        </>
+      )}
     </main>
   )
 }
