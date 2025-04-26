@@ -169,6 +169,33 @@ const portfolioItems: PortfolioItem[] = [
     images: ["/images/portfolio-assets/services-template.png"],
     liveUrl: "https://homemaster.framer.website/?via=framerbite",
     type: "template"
+  },
+  {
+    id: 16,
+    category: "construction",
+    title: "North Architecture",
+    description: "Modern architecture and design firm template. Perfect for residential, commercial, and interior design studios. Clean, professional, and ready for any creative business.",
+    images: ["/images/portfolio-assets/construction-template.png"],
+    liveUrl: "https://northarch.framer.website/",
+    type: "template"
+  },
+  {
+    id: 17,
+    category: "real-estate",
+    title: "Swaarg",
+    description: "Luxury real estate and architecture template. Perfect for showcasing premium residential and commercial projects, elegant living, and modern design. Includes blog, project highlights, and more.",
+    images: ["/images/portfolio-assets/services2-template.png"],
+    liveUrl: "https://swaarg.framer.website/?via=remixframer",
+    type: "template"
+  },
+  {
+    id: 18,
+    category: "services",
+    title: "GreenStone",
+    description: "Eco-friendly kitchen and interior design template. Perfect for sustainable businesses, green contractors, and eco-conscious brands. Features custom green designs, recycled materials, and energy-efficient solutions.",
+    images: ["/images/portfolio-assets/greenstone-template.png"],
+    liveUrl: "https://greenstone.framer.website/",
+    type: "template"
   }
 ]
 
@@ -343,7 +370,7 @@ export function PortfolioSection() {
             Our <span className="gradient-text">Templates</span>
           </h2>
           <p className="text-base sm:text-lg text-foreground/80 px-4 sm:px-0">
-            Browse our collection of professional website templates designed for various industries and business needs.
+            Browse our collection of professional website templates designed for various industries and business needs. Any template can work for any business or industry.
           </p>
         </div>
 
