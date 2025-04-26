@@ -57,13 +57,19 @@ export function SiteHeader() {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden'
       document.documentElement.style.overflow = 'hidden'
+      document.body.style.overscrollBehavior = 'contain'
+      document.documentElement.style.overscrollBehavior = 'contain'
     } else {
       document.body.style.overflow = ''
       document.documentElement.style.overflow = ''
+      document.body.style.overscrollBehavior = ''
+      document.documentElement.style.overscrollBehavior = ''
     }
     return () => {
       document.body.style.overflow = ''
       document.documentElement.style.overflow = ''
+      document.body.style.overscrollBehavior = ''
+      document.documentElement.style.overscrollBehavior = ''
     }
   }, [isMobileMenuOpen])
 
@@ -141,9 +147,10 @@ export function SiteHeader() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-black md:hidden"
-            style={{ color: 'white' }}
+            className="fixed inset-0 z-[100] bg-black md:hidden border-4 border-yellow-400"
+            style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: 'none', fontWeight: 'bold' }}
           >
+            <div className="text-center text-yellow-400 font-bold">[DEBUG] Hamburger menu overlay is visible</div>
             <div className="flex flex-col min-h-screen h-full p-6">
               <div className="flex justify-between items-center mb-8">
                 <Link
@@ -165,7 +172,7 @@ export function SiteHeader() {
                 </button>
               </div>
 
-              <nav className="flex flex-col space-y-6 mt-8 text-white">
+              <nav className="flex flex-col space-y-6 mt-8" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: 'none', fontWeight: 'bold' }}>
                 {navItems.map((item) => (
                   <Link
                     key={item.name}

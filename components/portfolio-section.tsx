@@ -152,6 +152,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
   const imageRef = useRef<HTMLDivElement>(null)
   const scrollInterval = useRef<NodeJS.Timeout | null>(null)
   const [isTouchDevice, setIsTouchDevice] = useState(false)
+  const [imgError, setImgError] = useState(false)
 
   useEffect(() => {
     // Detect touch device
@@ -209,18 +210,19 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
           ref={imageRef}
           className="absolute inset-0 overflow-auto scrollbar-hide"
         >
-          <Image
-            src={item.images[0]}
-            alt={`${item.title} screenshot`}
-            width={1200}
-            height={5000}
-            className="w-full"
-            priority
-            onError={e => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = '/images/portfolio-assets/fallback.png';
-            }}
-          />
+          {!imgError ? (
+            <Image
+              src={item.images[0]}
+              alt={`${item.title} screenshot`}
+              width={1200}
+              height={5000}
+              className="w-full"
+              priority
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-red-200 text-red-800 font-bold">Image not found</div>
+          )}
         </div>
         <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ${isTouchDevice ? (isHovered ? 'opacity-100' : 'opacity-0') : 'opacity-0 group-hover:opacity-100'}`} />
         <div className={`absolute bottom-0 left-0 right-0 p-6 text-white transition-transform duration-300 ${isTouchDevice ? (isHovered ? 'translate-y-0' : 'translate-y-8') : 'translate-y-8 group-hover:translate-y-0'}`}>
@@ -298,7 +300,8 @@ export function PortfolioSection() {
     : portfolioItems.filter(item => item.category === selectedCategory)
 
   return (
-    <section className={`w-full py-16 md:py-32 ${isMobile ? 'bg-background' : ''}`}>
+    <section className={`w-full py-16 md:py-32 ${isMobile ? 'bg-background border-4 border-red-500' : ''}`}>
+      {isMobile && <div className="text-center text-red-600 font-bold">[DEBUG] Templates section is rendered on mobile</div>}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <motion.div
