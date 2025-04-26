@@ -122,15 +122,21 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const imageRef = useRef<HTMLDivElement>(null)
   const scrollInterval = useRef<NodeJS.Timeout | null>(null)
+  const [isTouchDevice, setIsTouchDevice] = useState(false)
 
   useEffect(() => {
-    if (isHovered && imageRef.current) {
+    // Detect touch device
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0)
+  }, [])
+
+  useEffect(() => {
+    if (isHovered && imageRef.current && !isTouchDevice) {
       // Start at the top when hover begins
       imageRef.current.scrollTop = 0
       
       // Calculate scroll parameters
       const totalHeight = imageRef.current.scrollHeight - imageRef.current.clientHeight
-      const duration = 15000 // 15 seconds to scroll full page (slowed down from 10s)
+      const duration = 15000 // 15 seconds to scroll full page
       const steps = 100 // Number of steps for smooth scrolling
       const stepSize = totalHeight / steps
       let currentStep = 0
@@ -154,7 +160,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
         clearInterval(scrollInterval.current)
       }
     }
-  }, [isHovered])
+  }, [isHovered, isTouchDevice])
 
   return (
     <>
@@ -164,9 +170,11 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="relative group rounded-2xl overflow-hidden w-full aspect-[4/3] cursor-pointer"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
+        onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
         onClick={() => setIsExpanded(true)}
+        onTouchStart={() => isTouchDevice && setIsHovered(true)}
+        onTouchEnd={() => isTouchDevice && setIsHovered(false)}
       >
         <div 
           ref={imageRef}
@@ -181,8 +189,8 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
             priority
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
+        <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ${isTouchDevice ? (isHovered ? 'opacity-100' : 'opacity-0') : 'opacity-0 group-hover:opacity-100'}`} />
+        <div className={`absolute bottom-0 left-0 right-0 p-6 text-white transition-transform duration-300 ${isTouchDevice ? (isHovered ? 'translate-y-0' : 'translate-y-8') : 'translate-y-8 group-hover:translate-y-0'}`}>
           <span className="inline-block rounded bg-primary px-2 py-1 text-xs font-semibold uppercase tracking-wider mb-2">
             {item.category}
           </span>
@@ -197,27 +205,34 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 touch-none"
             onClick={() => setIsExpanded(false)}
           >
             <motion.div
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              className="relative max-w-6xl w-full max-h-[90vh] rounded-2xl overflow-hidden bg-background"
+              className="relative w-full max-h-[90vh] rounded-2xl overflow-hidden bg-background"
+              style={{ maxWidth: isTouchDevice ? '100%' : '1200px' }}
               onClick={e => e.stopPropagation()}
             >
-              <Image
-                src={item.images[0]}
-                alt={`${item.title} screenshot`}
-                width={1920}
-                height={5000}
-                className="w-full"
-                priority
-              />
+              <div className="overflow-auto max-h-[90vh] touch-pan-y">
+                <Image
+                  src={item.images[0]}
+                  alt={`${item.title} screenshot`}
+                  width={1920}
+                  height={5000}
+                  className="w-full"
+                  priority
+                />
+              </div>
               <button
                 onClick={() => setIsExpanded(false)}
                 className="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                style={{ 
+                  padding: isTouchDevice ? '12px' : '8px',
+                  transform: isTouchDevice ? 'scale(1.2)' : 'scale(1)'
+                }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -240,9 +255,9 @@ export function PortfolioSection() {
     : portfolioItems.filter(item => item.category === selectedCategory)
 
   return (
-    <section className="w-full py-20 md:py-32">
+    <section className="w-full py-16 md:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -253,29 +268,43 @@ export function PortfolioSection() {
               Our Templates
             </span>
           </motion.div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             Our <span className="gradient-text">Templates</span>
           </h2>
-          <p className="text-lg text-foreground/80">
+          <p className="text-base sm:text-lg text-foreground/80 px-4 sm:px-0">
             Browse our collection of professional website templates designed for various industries and business needs.
           </p>
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              className={cn(
-                "px-4 py-2 rounded-full border",
-                category.id === selectedCategory
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "border-border"
-              )}
-            >
-              {category.label}
+          <div className="w-full overflow-x-auto pb-4 md:pb-0 hide-scrollbar">
+            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-3 min-w-max px-4 md:px-0">
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  className={cn(
+                    "px-4 py-2 rounded-full border whitespace-nowrap",
+                    category.id === selectedCategory
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "border-border"
+                  )}
+                >
+                  {category.label}
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
+
+        <style jsx global>{`
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
 
         <motion.div 
           layout
