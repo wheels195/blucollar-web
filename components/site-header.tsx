@@ -118,9 +118,9 @@ export function SiteHeader() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/#top" onClick={(e) => handleNavClick(e, "/#top")} className="flex items-center">
+          <div className="flex items-center">
             <AnimatedLogo size="default" />
-          </Link>
+          </div>
 
           {/* Desktop navigation */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -147,8 +147,9 @@ export function SiteHeader() {
           <button
             className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-background/10 text-foreground hover:bg-primary/10 transition-colors"
             onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open menu"
+            type="button"
           >
-            <span className="sr-only">Open menu</span>
             <Menu className="h-5 w-5" />
           </button>
         </div>
@@ -167,16 +168,9 @@ export function SiteHeader() {
           >
             <div className="flex flex-col min-h-screen h-full p-6">
               <div className="flex justify-between items-center mb-8">
-                <Link
-                  href="/#top"
-                  className="flex items-center"
-                  onClick={(e) => {
-                    handleNavClick(e, "/#top")
-                    setIsMobileMenuOpen(false)
-                  }}
-                >
+                <div className="flex items-center">
                   <AnimatedLogo size="default" />
-                </Link>
+                </div>
                 <button
                   className="flex items-center justify-center w-10 h-10 rounded-full bg-background/10 text-foreground hover:bg-primary/10 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
