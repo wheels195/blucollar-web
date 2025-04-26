@@ -7,14 +7,15 @@ import { cn } from "@/lib/utils"
 
 const categories = [
   { id: "all", label: "All" },
-  { id: "business", label: "Business Services" },
   { id: "construction", label: "Construction" },
   { id: "electrician", label: "Electrician" },
   { id: "handyman", label: "Handyman" },
   { id: "landscaper", label: "Landscaper" },
   { id: "plumber", label: "Plumber" },
+  { id: "pool", label: "Pool" },
   { id: "real-estate", label: "Real Estate" },
   { id: "restaurant", label: "Restaurant" },
+  { id: "services", label: "Services" }
 ]
 
 interface PortfolioItem {
@@ -31,7 +32,16 @@ interface PortfolioItem {
 const portfolioItems: PortfolioItem[] = [
   {
     id: 1,
-    category: "service",
+    category: "electrician",
+    title: "Electrician",
+    description: "Professional electrician service template with modern design, service booking, and 24/7 emergency response features.",
+    images: ["/images/portfolio-assets/electrician-template.png"],
+    liveUrl: "https://electrician-template.framer.website/",
+    type: "template"
+  },
+  {
+    id: 2,
+    category: "landscaper",
     title: "Landscapers",
     description: "Professional landscaping service template with project showcase and service booking features for garden and outdoor maintenance.",
     images: ["/images/portfolio-assets/landscapers-template.png"],
@@ -39,8 +49,8 @@ const portfolioItems: PortfolioItem[] = [
     type: "template"
   },
   {
-    id: 2,
-    category: "service",
+    id: 3,
+    category: "plumber",
     title: "Plumber",
     description: "Professional plumbing service template with 24/7 emergency booking and comprehensive service scheduling system.",
     images: ["/images/portfolio-assets/plumber-template.png"],
@@ -48,8 +58,8 @@ const portfolioItems: PortfolioItem[] = [
     type: "template"
   },
   {
-    id: 3,
-    category: "service",
+    id: 4,
+    category: "handyman",
     title: "Handyman",
     description: "Professional handyman service template with 24/7 availability, project scheduling, and comprehensive home repair solutions.",
     images: ["/images/portfolio-assets/handyman-template.png"],
@@ -57,8 +67,8 @@ const portfolioItems: PortfolioItem[] = [
     type: "template"
   },
   {
-    id: 4,
-    category: "business",
+    id: 5,
+    category: "services",
     title: "Nextspace",
     description: "Modern coworking space and office rental template with sleek design.",
     images: ["/images/portfolio-assets/nextspace.png"],
@@ -67,7 +77,7 @@ const portfolioItems: PortfolioItem[] = [
     type: "template"
   },
   {
-    id: 5,
+    id: 6,
     category: "restaurant",
     title: "Pepper",
     description: "Elegant restaurant and cafe template with online ordering and reservations.",
@@ -77,7 +87,7 @@ const portfolioItems: PortfolioItem[] = [
     type: "template"
   },
   {
-    id: 6,
+    id: 7,
     category: "restaurant",
     title: "Qitchen",
     description: "Modern restaurant template with menu showcase, online reservations, and beautiful food galleries.",
@@ -87,8 +97,8 @@ const portfolioItems: PortfolioItem[] = [
     type: "template"
   },
   {
-    id: 7,
-    category: "service",
+    id: 8,
+    category: "construction",
     title: "Refit",
     description: "Professional template perfect for contractors, repair services, and home improvement businesses.",
     images: ["/images/portfolio-assets/refit-template.png"],
@@ -97,8 +107,8 @@ const portfolioItems: PortfolioItem[] = [
     type: "template"
   },
   {
-    id: 8,
-    category: "service",
+    id: 9,
+    category: "landscaper",
     title: "Gardener",
     description: "Professional gardening and landscaping service template with project showcase and seasonal service scheduling.",
     images: ["/images/portfolio-assets/gardener-template.png"],
@@ -106,13 +116,31 @@ const portfolioItems: PortfolioItem[] = [
     type: "template"
   },
   {
-    id: 9,
+    id: 10,
     category: "construction",
     title: "Renova",
     description: "Professional template for construction companies and renovation services.",
     images: ["/images/portfolio-assets/renova-template.png"],
     liveUrl: "https://renova.framer.website/",
     sourceUrl: "https://framer.com/templates/renova",
+    type: "template"
+  },
+  {
+    id: 11,
+    category: "electrician",
+    title: "Electria",
+    description: "Modern electrician service template with 24/7 availability, emergency response, and comprehensive electrical solutions.",
+    images: ["/images/portfolio-assets/electriciann-template.png"],
+    liveUrl: "https://electria.framer.website/",
+    type: "template"
+  },
+  {
+    id: 12,
+    category: "pool",
+    title: "Aqua Dream",
+    description: "Professional aquarium design and installation template with stunning visuals for custom aquatic environments.",
+    images: ["/images/portfolio-assets/aqua-template.png"],
+    liveUrl: "https://aqua-dream.framer.website/",
     type: "template"
   }
 ]
@@ -276,21 +304,22 @@ export function PortfolioSection() {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-3 mb-8 md:mb-12">
           <div className="w-full overflow-x-auto pb-4 md:pb-0 hide-scrollbar">
-            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-3 min-w-max px-4 md:px-0">
+            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 md:gap-3 min-w-max px-2 md:px-0">
               {categories.map((category) => (
-                <div
+                <button
                   key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
                   className={cn(
-                    "px-4 py-2 rounded-full border whitespace-nowrap",
+                    "px-3 md:px-4 py-2.5 md:py-2 text-sm md:text-base rounded-full border whitespace-nowrap transition-colors duration-200 hover:bg-primary/90 hover:text-primary-foreground touch-manipulation",
                     category.id === selectedCategory
                       ? "bg-primary text-primary-foreground border-primary"
-                      : "border-border"
+                      : "border-border hover:border-primary"
                   )}
                 >
                   {category.label}
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -300,6 +329,7 @@ export function PortfolioSection() {
           .hide-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
           }
           .hide-scrollbar::-webkit-scrollbar {
             display: none;
@@ -308,7 +338,7 @@ export function PortfolioSection() {
 
         <motion.div 
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-[2000px] mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 max-w-[2000px] mx-auto px-2 sm:px-4 md:px-6"
         >
           {filteredItems.map((item) => (
             <PortfolioCard key={item.id} item={item} />
