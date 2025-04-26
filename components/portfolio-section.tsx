@@ -1,155 +1,290 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ScrollReveal } from "./scroll-reveal"
-import { ArrowRight } from "lucide-react"
+import Image from "next/image"
+import { cn } from "@/lib/utils"
 
-const projects = [
+const categories = [
+  { id: "all", label: "All" },
+  { id: "business", label: "Business Services" },
+  { id: "construction", label: "Construction" },
+  { id: "electrician", label: "Electrician" },
+  { id: "handyman", label: "Handyman" },
+  { id: "landscaper", label: "Landscaper" },
+  { id: "plumber", label: "Plumber" },
+  { id: "real-estate", label: "Real Estate" },
+  { id: "restaurant", label: "Restaurant" },
+]
+
+interface PortfolioItem {
+  id: number
+  category: string
+  title: string
+  description: string
+  images: string[]
+  liveUrl?: string  // Optional URL to live site
+  sourceUrl?: string // Optional URL to source code/template
+  type: 'website' | 'template' // Distinguish between real sites and templates
+}
+
+const portfolioItems: PortfolioItem[] = [
   {
     id: 1,
-    title: "Modern E-commerce Platform",
-    category: "E-commerce",
-    image: "/sleek-product-showcase.png",
-    description: "A high-converting e-commerce platform with seamless checkout and product filtering.",
+    category: "service",
+    title: "Landscapers",
+    description: "Professional landscaping service template with project showcase and service booking features for garden and outdoor maintenance.",
+    images: ["/images/portfolio-assets/landscapers-template.png"],
+    liveUrl: "https://landscapers.framer.website/",
+    type: "template"
   },
   {
     id: 2,
-    title: "Corporate Brand Website",
-    category: "Corporate",
-    image: "/sleek-corporate-darkmode.png",
-    description: "Sleek corporate website with interactive elements and brand storytelling.",
+    category: "service",
+    title: "Plumber",
+    description: "Professional plumbing service template with 24/7 emergency booking and comprehensive service scheduling system.",
+    images: ["/images/portfolio-assets/plumber-template.png"],
+    liveUrl: "https://plumbing.framer.media/",
+    type: "template"
   },
   {
     id: 3,
-    title: "Real Estate Listing Platform",
-    category: "Real Estate",
-    image: "/modern-real-estate-homepage.png",
-    description: "Property listing platform with advanced search and virtual tours.",
+    category: "service",
+    title: "Handyman",
+    description: "Professional handyman service template with 24/7 availability, project scheduling, and comprehensive home repair solutions.",
+    images: ["/images/portfolio-assets/handyman-template.png"],
+    liveUrl: "https://handyman.framer.photos/",
+    type: "template"
   },
   {
     id: 4,
-    title: "Health & Wellness App",
-    category: "Health",
-    image: "/holistic-health-dashboard.png",
-    description: "Wellness platform with appointment booking and health tracking features.",
+    category: "business",
+    title: "Nextspace",
+    description: "Modern coworking space and office rental template with sleek design.",
+    images: ["/images/portfolio-assets/nextspace.png"],
+    liveUrl: "https://nextspace.framer.website/",
+    sourceUrl: "https://framer.com/templates/nextspace",
+    type: "template"
   },
   {
     id: 5,
-    title: "Creative Agency Portfolio",
-    category: "Portfolio",
-    image: "/vibrant-agency-showcase.png",
-    description: "Stunning portfolio site with case studies and interactive project showcases.",
+    category: "restaurant",
+    title: "Pepper",
+    description: "Elegant restaurant and cafe template with online ordering and reservations.",
+    images: ["/images/portfolio-assets/pepper-template.png"],
+    liveUrl: "https://pepper.framer.website/",
+    sourceUrl: "https://framer.com/templates/pepper",
+    type: "template"
   },
   {
     id: 6,
-    title: "Restaurant Ordering System",
-    category: "Food",
-    image: "/placeholder.svg?height=600&width=800&query=restaurant%20website%20ordering%20system",
-    description: "Online ordering system with menu management and reservation features.",
+    category: "restaurant",
+    title: "Qitchen",
+    description: "Modern restaurant template with menu showcase, online reservations, and beautiful food galleries.",
+    images: ["/images/portfolio-assets/qitchen-template.png"],
+    liveUrl: "https://qitchen.framer.website/",
+    sourceUrl: "https://framer.com/templates/qitchen",
+    type: "template"
   },
+  {
+    id: 7,
+    category: "service",
+    title: "Refit",
+    description: "Professional template perfect for contractors, repair services, and home improvement businesses.",
+    images: ["/images/portfolio-assets/refit-template.png"],
+    liveUrl: "https://refit.framer.website/",
+    sourceUrl: "https://framer.com/templates/refit",
+    type: "template"
+  },
+  {
+    id: 8,
+    category: "service",
+    title: "Gardener",
+    description: "Professional gardening and landscaping service template with project showcase and seasonal service scheduling.",
+    images: ["/images/portfolio-assets/gardener-template.png"],
+    liveUrl: "https://gardener.framer.media/",
+    type: "template"
+  },
+  {
+    id: 9,
+    category: "construction",
+    title: "Renova",
+    description: "Professional template for construction companies and renovation services.",
+    images: ["/images/portfolio-assets/renova-template.png"],
+    liveUrl: "https://renova.framer.website/",
+    sourceUrl: "https://framer.com/templates/renova",
+    type: "template"
+  }
 ]
 
-const categories = ["All", "E-commerce", "Corporate", "Real Estate", "Health", "Portfolio", "Food"]
+function PortfolioCard({ item }: { item: PortfolioItem }) {
+  const [isHovered, setIsHovered] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
+  const imageRef = useRef<HTMLDivElement>(null)
+  const scrollInterval = useRef<NodeJS.Timeout | null>(null)
 
-export function PortfolioSection() {
-  const [activeCategory, setActiveCategory] = useState("All")
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null)
+  useEffect(() => {
+    if (isHovered && imageRef.current) {
+      // Start at the top when hover begins
+      imageRef.current.scrollTop = 0
+      
+      // Calculate scroll parameters
+      const totalHeight = imageRef.current.scrollHeight - imageRef.current.clientHeight
+      const duration = 15000 // 15 seconds to scroll full page (slowed down from 10s)
+      const steps = 100 // Number of steps for smooth scrolling
+      const stepSize = totalHeight / steps
+      let currentStep = 0
 
-  const filteredProjects =
-    activeCategory === "All" ? projects : projects.filter((project) => project.category === activeCategory)
+      scrollInterval.current = setInterval(() => {
+        if (imageRef.current && currentStep < steps) {
+          imageRef.current.scrollTop += stepSize
+          currentStep++
+        } else if (imageRef.current) {
+          // Reset to top when reaching bottom
+          imageRef.current.scrollTop = 0
+          currentStep = 0
+        }
+      }, duration / steps)
+    } else if (scrollInterval.current) {
+      clearInterval(scrollInterval.current)
+    }
+
+    return () => {
+      if (scrollInterval.current) {
+        clearInterval(scrollInterval.current)
+      }
+    }
+  }, [isHovered])
 
   return (
-    <section id="work" className="py-20 md:py-32 bg-background-light dark:bg-background-dark">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block px-3 py-1 text-sm font-medium text-primary-light dark:text-primary-dark bg-primary-light/10 dark:bg-primary-dark/10 rounded-full mb-4">
-              Our Work
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-6">
-              Recent <span className="gradient-text">Projects</span>
-            </h2>
-            <p className="text-lg text-foreground-light/80 dark:text-foreground-dark/80">
-              Explore our portfolio of successful projects across various industries.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        <ScrollReveal>
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  activeCategory === category
-                    ? "bg-primary-light dark:bg-primary-dark text-white"
-                    : "bg-surface-light dark:bg-surface-dark hover:bg-gray-200 dark:hover:bg-gray-800"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="wait">
-            {filteredProjects.map((project) => (
-              <ScrollReveal key={project.id}>
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  className="group relative overflow-hidden rounded-2xl border border-border-light dark:border-border-dark shadow-sm hover:shadow-xl transition-all duration-300"
-                  onMouseEnter={() => setHoveredProject(project.id)}
-                  onMouseLeave={() => setHoveredProject(null)}
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <img
-                      src={project.image || "/placeholder.svg"}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                    <div className="absolute inset-0 flex items-end p-6">
-                      <div className="w-full transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                        <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                        <p className="text-white/80 text-sm mb-4">{project.description}</p>
-                        <a
-                          href="#"
-                          className="inline-flex items-center text-sm font-medium text-white hover:text-primary-light dark:hover:text-primary-dark"
-                        >
-                          View Project <ArrowRight size={16} className="ml-1" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="absolute top-4 right-4">
-                    <span className="inline-block px-3 py-1 text-xs font-medium bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm rounded-full">
-                      {project.category}
-                    </span>
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
-          </AnimatePresence>
+    <>
+      <motion.div
+        layout
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="relative group rounded-2xl overflow-hidden w-full aspect-[4/3] cursor-pointer"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => setIsExpanded(true)}
+      >
+        <div 
+          ref={imageRef}
+          className="absolute inset-0 overflow-auto scrollbar-hide"
+        >
+          <Image
+            src={item.images[0]}
+            alt={`${item.title} screenshot`}
+            width={1200}
+            height={5000}
+            className="w-full"
+            priority
+          />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute bottom-0 left-0 right-0 p-6 text-white translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
+          <span className="inline-block rounded bg-primary px-2 py-1 text-xs font-semibold uppercase tracking-wider mb-2">
+            {item.category}
+          </span>
+          <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+          <p className="text-sm text-white/80">{item.description}</p>
+        </div>
+      </motion.div>
 
-        <div className="text-center mt-12">
-          <a
-            href="#"
-            className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full border border-border-light dark:border-border-dark hover:bg-surface-light dark:hover:bg-surface-dark transition-colors duration-200 hoverable"
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+            onClick={() => setIsExpanded(false)}
           >
-            View All Projects
-            <ArrowRight size={18} className="ml-2" />
-          </a>
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              className="relative max-w-6xl w-full max-h-[90vh] rounded-2xl overflow-hidden bg-background"
+              onClick={e => e.stopPropagation()}
+            >
+              <Image
+                src={item.images[0]}
+                alt={`${item.title} screenshot`}
+                width={1920}
+                height={5000}
+                className="w-full"
+                priority
+              />
+              <button
+                onClick={() => setIsExpanded(false)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
+
+export function PortfolioSection() {
+  const [selectedCategory, setSelectedCategory] = useState("all")
+
+  const filteredItems = selectedCategory === "all"
+    ? portfolioItems
+    : portfolioItems.filter(item => item.category === selectedCategory)
+
+  return (
+    <section className="w-full py-20 md:py-32">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-4"
+          >
+            <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
+              Our Templates
+            </span>
+          </motion.div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+            Our <span className="gradient-text">Templates</span>
+          </h2>
+          <p className="text-lg text-foreground/80">
+            Browse our collection of professional website templates designed for various industries and business needs.
+          </p>
         </div>
+
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              className={cn(
+                "px-4 py-2 rounded-full border",
+                category.id === selectedCategory
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "border-border"
+              )}
+            >
+              {category.label}
+            </div>
+          ))}
+        </div>
+
+        <motion.div 
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-[2000px] mx-auto"
+        >
+          {filteredItems.map((item) => (
+            <PortfolioCard key={item.id} item={item} />
+          ))}
+        </motion.div>
       </div>
     </section>
   )

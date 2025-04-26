@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { TrustStats } from "./trust-stats"
 
 // Updated for deployment: April 25, 2024 - Force update with all 4 sections
 
@@ -194,6 +195,8 @@ export function HeroSection() {
             </motion.div>
           ))}
         </div>
+
+        <TrustStats />
       </motion.div>
     </section>
   )

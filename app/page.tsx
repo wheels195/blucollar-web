@@ -13,18 +13,22 @@ import { ContactSection } from "@/components/contact-section"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { TechTicker } from "@/components/tech-ticker"
+import { PortfolioSection } from "@/components/portfolio-section"
 
 // Animation variants for sections
 const sectionVariants = {
-  hidden: { opacity: 0, y: 20 }, // Reduced y offset for smoother animation
+  hidden: { 
+    opacity: 0,
+    y: 20
+  },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5, // Faster animation
-      ease: "easeOut",
-    },
-  },
+      duration: 0.6,
+      ease: [0.25, 0.1, 0, 1],
+    }
+  }
 }
 
 // Section wrapper component for optimized loading
@@ -32,8 +36,8 @@ function Section({ id, children, priority = false }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { 
     once: true,
-    margin: "50% 0px -10% 0px", // Start loading earlier
-    amount: priority ? 0 : 0.1 // Lower threshold for non-priority sections
+    margin: priority ? "-10% 0px -10% 0px" : "-15% 0px -15% 0px", // Start animation when section is closer
+    amount: priority ? 0.1 : 0.15 // Trigger when more of the section is visible
   })
 
   return (
@@ -51,14 +55,11 @@ function Section({ id, children, priority = false }) {
 }
 
 export default function Home() {
-  const { scrollYProgress } = useScroll({
-    tolerance: 0.2, // Add tolerance for smoother progress bar
-  })
+  const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001,
-    mass: 0.5 // Lighter mass for smoother animation
+    restDelta: 0.001
   })
 
   useEffect(() => {
@@ -100,16 +101,23 @@ export default function Home() {
       {/* Priority sections (above the fold) */}
       <Section id="top" priority>
         <HeroSection />
+      </Section>
+
+      <Section id="trust" priority>
         <TrustSection />
       </Section>
 
-      <Section id="tech" priority>
+      <Section id="tech">
         <TechTicker />
       </Section>
 
       {/* Regular sections */}
       <Section id="services">
         <ServicesSection />
+      </Section>
+
+      <Section id="portfolio">
+        <PortfolioSection />
       </Section>
 
       <Section id="gallery">
