@@ -79,8 +79,6 @@ export default function Home() {
     // Optimize for mobile
     if (isMobile) {
       document.body.classList.add("no-custom-cursor")
-      // Disable smooth scrolling on mobile for better performance
-      document.documentElement.style.scrollBehavior = "auto"
     }
 
     // Enable passive scroll listeners
@@ -109,16 +107,36 @@ export default function Home() {
 
       {isMobile ? (
         <>
-          <HeroSection />
-          <TrustSection />
-          <TechTicker />
-          <ServicesSection />
-          <PortfolioSection />
-          <GallerySection />
-          <ProcessSection />
-          <PricingSection />
-          <FAQSection />
-          <ContactSection />
+          <div id="top">
+            <HeroSection />
+          </div>
+          <div id="trust">
+            <TrustSection />
+          </div>
+          <div id="tech">
+            <TechTicker />
+          </div>
+          <div id="services">
+            <ServicesSection />
+          </div>
+          <div id="portfolio">
+            <PortfolioSection />
+          </div>
+          <div id="gallery">
+            <GallerySection />
+          </div>
+          <div id="process">
+            <ProcessSection />
+          </div>
+          <div id="pricing">
+            <PricingSection />
+          </div>
+          <div id="faq">
+            <FAQSection />
+          </div>
+          <div id="contact">
+            <ContactSection />
+          </div>
           <SiteFooter />
         </>
       ) : (
