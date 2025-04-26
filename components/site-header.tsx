@@ -101,7 +101,8 @@ export function SiteHeader() {
           behavior: "smooth",
         });
       }
-      setIsMobileMenuOpen(false);
+      // Add a small delay before closing the menu to ensure scroll works
+      setTimeout(() => setIsMobileMenuOpen(false), 200);
     }
   };
 
