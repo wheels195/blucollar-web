@@ -10,6 +10,10 @@ interface ScrollRevealProps {
 }
 
 export function ScrollReveal({ children, delay = 0, threshold = 0.1 }: ScrollRevealProps) {
+  // Detect mobile device
+  if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    return <>{children}</>;
+  }
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: threshold })
 
