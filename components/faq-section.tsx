@@ -186,8 +186,8 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="py-20 md:py-32 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="py-14 sm:py-20 md:py-32 bg-background">
+      <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.div

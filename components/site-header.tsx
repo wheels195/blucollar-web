@@ -52,6 +52,21 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
+
   const handleNavClick = (e, href) => {
     // Only handle internal hash links
     if (href.startsWith("/#")) {
@@ -126,7 +141,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-lg md:hidden"
+            className="fixed inset-0 z-[100] bg-black md:hidden"
           >
             <div className="flex flex-col h-full p-6">
               <div className="flex justify-between items-center mb-8">

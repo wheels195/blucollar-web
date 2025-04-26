@@ -278,7 +278,16 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
 
 export function PortfolioSection() {
   const [selectedCategory, setSelectedCategory] = useState("all")
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const checkMobile = () => setIsMobile(window.innerWidth < 768)
+      checkMobile()
+      window.addEventListener('resize', checkMobile)
+      return () => window.removeEventListener('resize', checkMobile)
+    }
+  }, [])
 
   const filteredItems = selectedCategory === "all"
     ? portfolioItems

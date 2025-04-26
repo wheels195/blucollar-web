@@ -59,8 +59,8 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 md:py-32 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-14 sm:py-20 md:py-32 bg-background">
+      <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="inline-block px-3 py-1 text-sm font-medium text-primary bg-primary/10 rounded-full mb-4">

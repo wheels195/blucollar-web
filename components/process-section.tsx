@@ -48,8 +48,8 @@ export function ProcessSection() {
   const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
   return (
-    <section id="process" className="py-20 md:py-32 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="process" className="py-14 sm:py-20 md:py-32 bg-muted/30">
+      <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.div

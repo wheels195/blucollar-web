@@ -75,8 +75,8 @@ export function GallerySection() {
   }
 
   return (
-    <section id="gallery" className="py-20 md:py-32 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="gallery" className="py-14 sm:py-20 md:py-32 bg-muted/30">
+      <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.div
@@ -99,7 +99,7 @@ export function GallerySection() {
         </ScrollReveal>
 
         <div className="relative">
-          <div className="relative h-[800px] overflow-hidden rounded-xl bg-gray-100">
+          <div className="relative h-[300px] xs:h-[400px] sm:h-[600px] md:h-[800px] overflow-hidden rounded-xl bg-gray-100">
             {/* Main Image */}
             <div className="absolute inset-0">
               <img

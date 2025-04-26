@@ -60,7 +60,7 @@ const itemVariants = {
 
 export function TrustSection() {
   return (
-    <section id="why-us" className="py-32 relative overflow-hidden">
+    <section id="why-us" className="py-16 sm:py-24 md:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
       
       {/* Animated background elements */}
@@ -99,7 +99,7 @@ export function TrustSection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}

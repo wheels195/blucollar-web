@@ -40,8 +40,8 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="py-20 md:py-32 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-14 sm:py-20 md:py-32 bg-muted/30">
+      <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.div
@@ -63,7 +63,7 @@ export function ServicesSection() {
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <ScrollReveal key={index} delay={index * 0.1}>
               <div className="bg-background rounded-xl p-6 border border-border shadow-sm hover:shadow-md transition-all duration-300 card-hover h-full">

@@ -91,7 +91,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-background to-background/80 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-b from-background to-background/80 overflow-hidden px-2 sm:px-0">
       <motion.div 
         className="absolute inset-0 bg-grid-white/[0.02] bg-[size:75px_75px]"
         initial={{ opacity: 0 }}
@@ -101,21 +101,21 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
       
       <motion.div 
-        className="container relative mx-auto px-4 pt-20"
+        className="container relative mx-auto px-2 sm:px-4 pt-20"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="text-center max-w-4xl mx-auto mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-16">
           <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+            className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 tracking-tight"
             variants={headlineVariants}
           >
             Modern Websites for Local Businesses — Built Fast. Built to Grow.
           </motion.h1>
           
           <motion.p
-            className="text-lg md:text-xl text-white/80 mb-8"
+            className="text-base xs:text-lg md:text-xl text-white/80 mb-6 sm:mb-8"
             variants={fadeUpVariants}
           >
             We create high-performance, mobile-ready websites that turn visitors into customers — without the tech headaches.
@@ -135,7 +135,7 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-[95rem] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-[95rem] mx-auto">
           {[
             {
               image: "/images/hero/landscaper.png",
