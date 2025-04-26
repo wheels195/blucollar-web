@@ -27,12 +27,19 @@ export function SiteHeader() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
 
-      // Get the current scroll position
-      const scrollPosition = window.scrollY + window.innerHeight / 3
+      // Use a fixed nav offset for more accurate section detection
+      const navOffset = 80; // Adjust if your nav is taller/shorter
+      const scrollPosition = window.scrollY + navOffset;
 
       // Find which section we're in
       const sections = ["top", "why-us", "services", "portfolio", "gallery", "process", "pricing", "faq", "contact"]
       let currentSection = sections[0]
+
+      // If at the very top, always highlight 'Home'
+      if (window.scrollY < 10) {
+        setActiveSection("top")
+        return
+      }
 
       for (const section of sections) {
         const element = document.getElementById(section)
@@ -82,33 +89,21 @@ export function SiteHeader() {
   }, [isMobileMenuOpen])
 
   const handleNavClick = (e, href) => {
-    // Only handle internal hash links
     if (href.startsWith("/#")) {
-      e.preventDefault()
-      const targetId = href.replace("/#", "")
-      // If mobile menu is open, close it first, then scroll after DOM updates
-      if (isMobileMenuOpen) {
-        setIsMobileMenuOpen(false)
-        setTimeout(() => {
-          const targetElement = document.getElementById(targetId)
-          if (targetElement) {
-            window.scrollTo({
-              top: targetId === "top" ? 0 : targetElement.offsetTop - 80,
-              behavior: "smooth",
-            })
-          }
-        }, 300) // Wait for menu close animation and DOM update
-      } else {
-        const targetElement = document.getElementById(targetId)
-        if (targetElement) {
-          window.scrollTo({
-            top: targetId === "top" ? 0 : targetElement.offsetTop - 80,
-            behavior: "smooth",
-          })
-        }
+      e.preventDefault();
+      const targetId = href.replace("/#", "");
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const navOffset = window.innerWidth < 768 ? 64 : 80; // Responsive offset
+        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: elementPosition - navOffset,
+          behavior: "smooth",
+        });
       }
+      setIsMobileMenuOpen(false);
     }
-  }
+  };
 
   return (
     <header
@@ -119,7 +114,9 @@ export function SiteHeader() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
-            <AnimatedLogo size="default" />
+            <Link href="/#top" onClick={(e) => handleNavClick(e, "/#top")} className="flex items-center cursor-pointer" aria-label="Go to top">
+              <AnimatedLogo size="default" />
+            </Link>
           </div>
 
           {/* Desktop navigation */}
@@ -169,7 +166,9 @@ export function SiteHeader() {
             <div className="flex flex-col min-h-screen h-full p-6">
               <div className="flex justify-between items-center mb-8">
                 <div className="flex items-center">
-                  <AnimatedLogo size="default" />
+                  <Link href="/#top" onClick={(e) => handleNavClick(e, "/#top")} className="flex items-center cursor-pointer" aria-label="Go to top">
+                    <AnimatedLogo size="default" />
+                  </Link>
                 </div>
                 <button
                   className="flex items-center justify-center w-10 h-10 rounded-full bg-background/10 text-foreground hover:bg-primary/10 transition-colors"
@@ -190,10 +189,7 @@ export function SiteHeader() {
                         ? "text-primary"
                         : "text-foreground hover:text-primary"
                     }`}
-                    onClick={(e) => {
-                      handleNavClick(e, item.href)
-                      setIsMobileMenuOpen(false)
-                    }}
+                    onClick={(e) => handleNavClick(e, item.href)}
                   >
                     {item.name}
                   </Link>
