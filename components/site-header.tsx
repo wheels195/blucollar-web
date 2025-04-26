@@ -55,22 +55,30 @@ export function SiteHeader() {
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-      document.documentElement.style.overflow = 'hidden'
-      document.body.style.overscrollBehavior = 'contain'
-      document.documentElement.style.overscrollBehavior = 'contain'
+      // Standard scroll lock
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overscrollBehavior = 'contain';
+      document.documentElement.style.overscrollBehavior = 'contain';
+      // iOS fallback
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
     } else {
-      document.body.style.overflow = ''
-      document.documentElement.style.overflow = ''
-      document.body.style.overscrollBehavior = ''
-      document.documentElement.style.overscrollBehavior = ''
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.overscrollBehavior = '';
+      document.documentElement.style.overscrollBehavior = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
     }
     return () => {
-      document.body.style.overflow = ''
-      document.documentElement.style.overflow = ''
-      document.body.style.overscrollBehavior = ''
-      document.documentElement.style.overscrollBehavior = ''
-    }
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.overscrollBehavior = '';
+      document.documentElement.style.overscrollBehavior = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    };
   }, [isMobileMenuOpen])
 
   const handleNavClick = (e, href) => {
@@ -154,8 +162,8 @@ export function SiteHeader() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-black bg-opacity-100 md:hidden"
-            style={{ color: 'white' }}
+            className="fixed inset-0 z-[100] bg-black md:hidden"
+            style={{ color: 'white', background: 'rgba(0,0,0,0.95)' }}
           >
             <div className="flex flex-col min-h-screen h-full p-6">
               <div className="flex justify-between items-center mb-8">
