@@ -89,12 +89,11 @@ const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 7,
-    category: "restaurant",
-    title: "Qitchen",
-    description: "Modern restaurant template with menu showcase, online reservations, and beautiful food galleries.",
-    images: ["/images/portfolio-assets/qitchen-template.png"],
-    liveUrl: "https://qitchen.framer.website/",
-    sourceUrl: "https://framer.com/templates/qitchen",
+    category: "services",
+    title: "Cleaner",
+    description: "Award-winning cleaning service template for professional cleaning businesses, featuring service booking, testimonials, and a modern gallery.",
+    images: ["/images/portfolio-assets/cleaner-template.png"],
+    liveUrl: "https://cleaner.framer.website/?via=framerbite",
     type: "template"
   },
   {
@@ -142,6 +141,33 @@ const portfolioItems: PortfolioItem[] = [
     description: "Professional aquarium design and installation template with stunning visuals for custom aquatic environments.",
     images: ["/images/portfolio-assets/aqua-template.png"],
     liveUrl: "https://aqua-dream.framer.website/",
+    type: "template"
+  },
+  {
+    id: 13,
+    category: "construction",
+    title: "RoofShield",
+    description: "Best Roofing Service in Texas. Protect your home with the highest quality roofing services, from installation to repairs. Includes free estimates, emergency repairs, and a modern, trustworthy design.",
+    images: ["/images/portfolio-assets/roofing2-template.png"],
+    liveUrl: "https://roofshiield.framer.website/",
+    type: "template"
+  },
+  {
+    id: 14,
+    category: "plumber",
+    title: "QuickFix",
+    description: "Fast and reliable plumbing service template. 24/7 availability, expert team, customer testimonials, and modern appointment booking for plumbing businesses.",
+    images: ["/images/portfolio-assets/plumber2-template.png"],
+    liveUrl: "https://quickfix.framer.website/?via=framerbite",
+    type: "template"
+  },
+  {
+    id: 15,
+    category: "services",
+    title: "HomeMaster",
+    description: "Multipurpose local business & service website template. Includes 6 unique homepages (cleaning, plumbing, pest control, renovation, elderly care, roofing) and 15 essential inner pages. Build and launch your business website fast!",
+    images: ["/images/portfolio-assets/services-template.png"],
+    liveUrl: "https://homemaster.framer.website/?via=framerbite",
     type: "template"
   }
 ]

@@ -78,19 +78,26 @@ export function SiteHeader() {
     if (href.startsWith("/#")) {
       e.preventDefault()
       const targetId = href.replace("/#", "")
-      const targetElement = document.getElementById(targetId)
-
-      if (targetElement) {
-        // Close mobile menu if open
-        if (isMobileMenuOpen) {
-          setIsMobileMenuOpen(false)
+      // If mobile menu is open, close it first, then scroll after DOM updates
+      if (isMobileMenuOpen) {
+        setIsMobileMenuOpen(false)
+        setTimeout(() => {
+          const targetElement = document.getElementById(targetId)
+          if (targetElement) {
+            window.scrollTo({
+              top: targetId === "top" ? 0 : targetElement.offsetTop - 80,
+              behavior: "smooth",
+            })
+          }
+        }, 300) // Wait for menu close animation and DOM update
+      } else {
+        const targetElement = document.getElementById(targetId)
+        if (targetElement) {
+          window.scrollTo({
+            top: targetId === "top" ? 0 : targetElement.offsetTop - 80,
+            behavior: "smooth",
+          })
         }
-
-        // Scroll to the target element
-        window.scrollTo({
-          top: targetId === "top" ? 0 : targetElement.offsetTop - 80, // Adjust for header height
-          behavior: "smooth",
-        })
       }
     }
   }
@@ -150,7 +157,6 @@ export function SiteHeader() {
             className="fixed inset-0 z-[100] bg-black bg-opacity-100 md:hidden"
             style={{ color: 'white' }}
           >
-            <div className="text-center text-yellow-400 font-bold">[DEBUG] Hamburger menu overlay is visible</div>
             <div className="flex flex-col min-h-screen h-full p-6">
               <div className="flex justify-between items-center mb-8">
                 <Link
