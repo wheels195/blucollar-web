@@ -93,6 +93,7 @@ export function SiteHeader() {
       e.preventDefault();
       const targetId = href.replace("/#", "");
       const targetElement = document.getElementById(targetId);
+      console.log("[NavClick] href:", href, "targetId:", targetId, "found:", !!targetElement);
       if (targetElement) {
         const navOffset = window.innerWidth < 768 ? 64 : 80; // Responsive offset
         const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
@@ -100,8 +101,11 @@ export function SiteHeader() {
           top: elementPosition - navOffset,
           behavior: "smooth",
         });
+      } else if (targetId === "top") {
+        // Fallback: scroll to top if Home/logo is clicked and no element found
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
-      // Add a small delay before closing the menu to ensure scroll works
+      // Always close the mobile menu after navigation
       setTimeout(() => setIsMobileMenuOpen(false), 200);
     }
   };
