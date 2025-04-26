@@ -111,14 +111,14 @@ export function HeroSection() {
             className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 tracking-tight"
             variants={headlineVariants}
           >
-            Modern Websites for Local Businesses — Built Fast. Built to Grow.
+            Modern Websites That Win You Customers — Built Fast for Local Businesses
           </motion.h1>
           
           <motion.p
             className="text-base xs:text-lg md:text-xl text-white/80 mb-6 sm:mb-8"
             variants={fadeUpVariants}
           >
-            We create high-performance, mobile-ready websites that turn visitors into customers — without the tech headaches.
+            Modern, mobile-first websites designed to bring you more customers, more calls, and more sales — without the tech headaches.
           </motion.p>
 
           <motion.div
