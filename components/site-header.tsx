@@ -147,8 +147,8 @@ export function SiteHeader() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-black md:hidden border-4 border-yellow-400"
-            style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: 'none', fontWeight: 'bold' }}
+            className="fixed inset-0 z-[100] bg-black md:hidden"
+            style={{ color: 'white' }}
           >
             <div className="text-center text-yellow-400 font-bold">[DEBUG] Hamburger menu overlay is visible</div>
             <div className="flex flex-col min-h-screen h-full p-6">

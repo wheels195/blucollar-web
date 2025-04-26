@@ -300,8 +300,7 @@ export function PortfolioSection() {
     : portfolioItems.filter(item => item.category === selectedCategory)
 
   return (
-    <section className={`w-full py-16 md:py-32 ${isMobile ? 'bg-background border-4 border-red-500' : ''}`}>
-      {isMobile && <div className="text-center text-red-600 font-bold">[DEBUG] Templates section is rendered on mobile</div>}
+    <section className={`w-full py-16 md:py-32 ${isMobile ? 'bg-background' : ''}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <motion.div
