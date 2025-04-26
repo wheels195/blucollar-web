@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { useMediaQuery } from "@uidotdev/usehooks"
 
 const categories = [
   { id: "all", label: "All" },
@@ -277,6 +278,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
 
 export function PortfolioSection() {
   const [selectedCategory, setSelectedCategory] = useState("all")
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   const filteredItems = selectedCategory === "all"
     ? portfolioItems
@@ -286,16 +288,24 @@ export function PortfolioSection() {
     <section className="w-full py-16 md:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-4"
-          >
-            <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
-              Our Templates
-            </span>
-          </motion.div>
+          {isMobile ? (
+            <div className="mb-4">
+              <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
+                Our Templates
+              </span>
+            </div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-4"
+            >
+              <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
+                Our Templates
+              </span>
+            </motion.div>
+          )}
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             Our <span className="gradient-text">Templates</span>
           </h2>
