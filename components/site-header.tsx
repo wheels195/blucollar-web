@@ -142,8 +142,9 @@ export function SiteHeader() {
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="fixed inset-0 z-[100] bg-black md:hidden"
+            style={{ color: 'white' }}
           >
-            <div className="flex flex-col h-full p-6">
+            <div className="flex flex-col min-h-screen h-full p-6">
               <div className="flex justify-between items-center mb-8">
                 <Link
                   href="/#top"
@@ -164,7 +165,7 @@ export function SiteHeader() {
                 </button>
               </div>
 
-              <nav className="flex flex-col space-y-6 mt-8">
+              <nav className="flex flex-col space-y-6 mt-8 text-white">
                 {navItems.map((item) => (
                   <Link
                     key={item.name}

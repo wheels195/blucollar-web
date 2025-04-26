@@ -216,6 +216,10 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
             height={5000}
             className="w-full"
             priority
+            onError={e => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = '/images/portfolio-assets/fallback.png';
+            }}
           />
         </div>
         <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ${isTouchDevice ? (isHovered ? 'opacity-100' : 'opacity-0') : 'opacity-0 group-hover:opacity-100'}`} />
@@ -294,27 +298,19 @@ export function PortfolioSection() {
     : portfolioItems.filter(item => item.category === selectedCategory)
 
   return (
-    <section className="w-full py-16 md:py-32">
+    <section className={`w-full py-16 md:py-32 ${isMobile ? 'bg-background' : ''}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          {isMobile ? (
-            <div className="mb-4">
-              <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
-                Our Templates
-              </span>
-            </div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mb-4"
-            >
-              <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
-                Our Templates
-              </span>
-            </motion.div>
-          )}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-4"
+          >
+            <span className="inline-block px-3 py-1.5 text-sm font-medium text-primary bg-primary/10 rounded-full">
+              Our Templates
+            </span>
+          </motion.div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             Our <span className="gradient-text">Templates</span>
           </h2>
