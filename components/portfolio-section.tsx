@@ -252,7 +252,7 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="relative group rounded-2xl overflow-hidden w-full aspect-[4/3] cursor-pointer"
+        className="relative group rounded-2xl overflow-hidden w-full aspect-[4/3] cursor-pointer min-h-[340px] md:min-h-[420px] lg:min-h-[500px] xl:min-h-[560px]"
         onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
         onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
         onClick={() => setIsExpanded(true)}
@@ -409,10 +409,16 @@ export function PortfolioSection() {
           }
         `}</style>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {filteredItems.map((item) => (
             <PortfolioCard key={item.id} item={item} />
           ))}
+        </div>
+        {/* CTA below grid */}
+        <div className="flex justify-center mt-10">
+          <a href="#contact" className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-xl shadow-primary/25 hover:shadow-primary/50">
+            Start Your Project
+          </a>
         </div>
       </div>
     </section>

@@ -4,8 +4,14 @@ import { Logo } from "./logo"
 
 export function SiteFooter() {
   return (
-    <footer className="bg-muted/30 border-t border-border">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <footer className="bg-background border-t border-border py-10">
+      <div className="container mx-auto px-4 flex flex-col items-center">
+        <div className="flex flex-col items-center mb-8">
+          <span className="text-xl font-bold mb-4 text-white text-center">Ready to grow your business? Let's talk!</span>
+          <a href="#contact" className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-xl shadow-primary/25 hover:shadow-primary/50">
+            Contact Us
+          </a>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           <div>
             <Link href="/" className="inline-block">
