@@ -91,7 +91,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-background to-background/80 overflow-hidden px-2 sm:px-0">
+    <section className="relative min-h-screen bg-gradient-to-b from-background to-background/80 overflow-hidden px-2 sm:px-0 pt-8 pb-8 sm:pt-20 sm:pb-0">
       <motion.div 
         className="absolute inset-0 bg-grid-white/[0.02] bg-[size:75px_75px]"
         initial={{ opacity: 0 }}
@@ -101,21 +101,21 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
       
       <motion.div 
-        className="container relative mx-auto px-2 sm:px-4 pt-20"
+        className="container relative mx-auto px-2 sm:px-4 pt-8 sm:pt-20"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-16">
           <motion.h1 
-            className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 tracking-tight"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-tight"
             variants={headlineVariants}
           >
             Modern Websites That Win You Customers — Built Fast for Local Businesses
           </motion.h1>
           
           <motion.p
-            className="text-base xs:text-lg md:text-xl text-white/80 mb-6 sm:mb-8"
+            className="text-lg xs:text-xl md:text-2xl text-white/80 mb-8 sm:mb-10"
             variants={fadeUpVariants}
           >
             Modern, mobile-first websites designed to bring you more customers, more calls, and more sales — without the tech headaches.
@@ -127,15 +127,16 @@ export function HeroSection() {
           >
             <Link
               href="/#contact"
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-primary hover:bg-primary/90 rounded-full transition-colors duration-300 shadow-xl shadow-primary/25 hover:shadow-primary/50"
+              className="inline-flex items-center justify-center px-8 py-5 text-xl font-semibold text-white bg-primary hover:bg-primary/90 rounded-full transition-colors duration-300 shadow-xl shadow-primary/25 hover:shadow-primary/50 min-w-[220px] min-h-[56px]"
+              style={{ fontSize: '1.25rem' }}
             >
               Get a Free Website Mockup
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-6 w-6" />
             </Link>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-[95rem] mx-auto">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 lg:gap-8 max-w-[95rem] mx-auto mt-8">
           {[
             {
               image: "/images/hero/landscaper.png",
@@ -164,7 +165,7 @@ export function HeroSection() {
           ].map((item, index) => (
             <motion.div
               key={item.business}
-              className="relative group rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+              className="relative group rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 min-h-[320px]"
               custom={index}
               variants={imageVariants}
             >
@@ -174,29 +175,33 @@ export function HeroSection() {
                     src="/images/hero/pool.png"
                     alt="Professional pool cleaning service"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    loading="lazy"
+                    sizes="(max-width: 640px) 95vw, (max-width: 1024px) 45vw, 23vw"
                   />
                 ) : (
                   <Image 
                     src={item.image}
                     alt={item.alt}
                     fill
-                    quality={100}
-                    priority={true}
+                    quality={80}
+                    priority={false}
                     sizes="(max-width: 640px) 95vw, (max-width: 1024px) 45vw, 23vw"
                     className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/0 transition-opacity duration-500 group-hover:from-black/90" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white transform transition-transform duration-500">
-                  <p className="text-lg sm:text-xl font-medium mb-2 sm:mb-3 transform transition-transform duration-500 group-hover:translate-y-[-4px]">{item.tagline}</p>
-                  <p className="text-sm sm:text-base text-white/80 transform transition-transform duration-500 group-hover:translate-y-[-4px]">{item.business}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8 text-white transform transition-transform duration-500">
+                  <p className="text-base sm:text-xl font-medium mb-2 sm:mb-3 transform transition-transform duration-500 group-hover:translate-y-[-4px]">{item.tagline}</p>
+                  <p className="text-xs sm:text-base text-white/80 transform transition-transform duration-500 group-hover:translate-y-[-4px]">{item.business}</p>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        <TrustStats />
+        <div className="mt-10 sm:mt-16">
+          <TrustStats />
+        </div>
       </motion.div>
     </section>
   )

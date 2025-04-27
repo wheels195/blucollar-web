@@ -59,10 +59,10 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-14 sm:py-20 md:py-32 bg-background">
+    <section id="contact" className="py-10 sm:py-20 md:py-32 bg-background">
       <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
             <span className="inline-block px-3 py-1 text-sm font-medium text-primary bg-primary/10 rounded-full mb-4">
               Get In Touch
             </span>
@@ -75,9 +75,9 @@ export function ContactSection() {
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12">
           <ScrollReveal direction="right">
-            <div className="bg-muted/30 rounded-xl p-6 md:p-8 border border-border shadow-xl h-full">
+            <div className="bg-muted/30 rounded-xl p-4 sm:p-6 md:p-8 border border-border shadow-xl h-full">
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
 
               <div className="space-y-6">
@@ -142,7 +142,7 @@ export function ContactSection() {
           </ScrollReveal>
 
           <ScrollReveal direction="left">
-            <div className="bg-muted/30 rounded-xl p-6 md:p-8 border border-border shadow-xl">
+            <div className="bg-muted/30 rounded-xl p-4 sm:p-6 md:p-8 border border-border shadow-xl">
               {isSubmitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -180,12 +180,12 @@ export function ContactSection() {
                         value={formState.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
+                        className="w-full px-4 py-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary transition-colors text-base"
                         placeholder="Your name"
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                       <div>
                         <label htmlFor="email" className="block text-sm font-medium mb-2">
                           Email
@@ -197,14 +197,13 @@ export function ContactSection() {
                           value={formState.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
-                          placeholder="Your email"
+                          className="w-full px-4 py-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary transition-colors text-base"
+                          placeholder="you@email.com"
                         />
                       </div>
-
                       <div>
                         <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                          Phone (Optional)
+                          Phone
                         </label>
                         <input
                           type="tel"
@@ -212,8 +211,8 @@ export function ContactSection() {
                           name="phone"
                           value={formState.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
-                          placeholder="Your phone number"
+                          className="w-full px-4 py-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary transition-colors text-base"
+                          placeholder="(555) 123-4567"
                         />
                       </div>
                     </div>
@@ -228,26 +227,23 @@ export function ContactSection() {
                         value={formState.message}
                         onChange={handleChange}
                         required
-                        rows={5}
-                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
-                        placeholder="Tell us about your project"
+                        className="w-full px-4 py-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary transition-colors text-base min-h-[120px]"
+                        placeholder="How can we help you?"
                       />
                     </div>
+                  </div>
 
+                  <div className="mt-8 flex justify-center">
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 disabled:opacity-70"
+                      className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 min-w-[180px] min-h-[52px]"
                     >
                       {isSubmitting ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                          Sending...
-                        </>
+                        <span>Sending...</span>
                       ) : (
                         <>
-                          Send Message
-                          <Send size={18} className="ml-2" />
+                          <Send className="h-5 w-5 mr-2" /> Send Message
                         </>
                       )}
                     </button>

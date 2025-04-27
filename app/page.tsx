@@ -107,34 +107,34 @@ export default function Home() {
 
       {isMobile ? (
         <>
-          <div id="top">
+          <div id="top" className="mb-10">
             <HeroSection />
           </div>
-          <div id="trust">
+          <div id="trust" className="mb-10">
             <TrustSection />
           </div>
-          <div id="tech">
+          <div id="tech" className="mb-10">
             <TechTicker />
           </div>
-          <div id="services">
+          <div id="services" className="mb-10">
             <ServicesSection />
           </div>
-          <div id="portfolio">
+          <div id="portfolio" className="mb-10">
             <PortfolioSection />
           </div>
-          <div id="gallery">
+          <div id="gallery" className="mb-10">
             <GallerySection />
           </div>
-          <div id="process">
+          <div id="process" className="mb-10">
             <ProcessSection />
           </div>
-          <div id="pricing">
+          <div id="pricing" className="mb-10">
             <PricingSection />
           </div>
-          <div id="faq">
+          <div id="faq" className="mb-10">
             <FAQSection />
           </div>
-          <div id="contact">
+          <div id="contact" className="mb-10">
             <ContactSection />
           </div>
           <SiteFooter />

@@ -270,7 +270,9 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
               width={1200}
               height={5000}
               className="w-full"
-              priority
+              priority={false}
+              loading="lazy"
+              quality={isTouchDevice ? 60 : 80}
               onError={() => setImgError(true)}
             />
           ) : (
@@ -353,9 +355,9 @@ export function PortfolioSection() {
     : portfolioItems.filter(item => item.category === selectedCategory)
 
   return (
-    <section className={`w-full py-16 md:py-32 ${isMobile ? 'bg-background' : ''}`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+    <section className={`w-full py-10 sm:py-16 md:py-32 ${isMobile ? 'bg-background' : ''}`}>
+      <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -369,12 +371,12 @@ export function PortfolioSection() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             Our <span className="gradient-text">Templates</span>
           </h2>
-          <p className="text-base sm:text-lg text-foreground/80 px-4 sm:px-0">
+          <p className="text-base sm:text-lg text-foreground/80 px-2 sm:px-0">
             Browse our collection of professional website templates designed for various industries and business needs. Any template can work for any business or industry.
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-8 md:mb-12">
+        <div className="flex flex-wrap justify-center gap-3 mb-6 sm:mb-8 md:mb-12">
           <div className="w-full overflow-x-auto pb-4 md:pb-0 hide-scrollbar">
             <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 md:gap-3 min-w-max px-2 md:px-0">
               {categories.map((category) => (
@@ -382,11 +384,12 @@ export function PortfolioSection() {
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
                   className={cn(
-                    "px-3 md:px-4 py-2.5 md:py-2 text-sm md:text-base rounded-full border whitespace-nowrap transition-colors duration-200 hover:bg-primary/90 hover:text-primary-foreground touch-manipulation",
+                    "px-4 py-3 text-base rounded-full border whitespace-nowrap transition-colors duration-200 hover:bg-primary/90 hover:text-primary-foreground touch-manipulation min-w-[100px] min-h-[44px]",
                     category.id === selectedCategory
                       ? "bg-primary text-primary-foreground border-primary"
                       : "border-border hover:border-primary"
                   )}
+                  style={{ fontSize: '1rem' }}
                 >
                   {category.label}
                 </button>
@@ -406,14 +409,11 @@ export function PortfolioSection() {
           }
         `}</style>
 
-        <motion.div 
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 max-w-[2000px] mx-auto px-2 sm:px-4 md:px-6"
-        >
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredItems.map((item) => (
             <PortfolioCard key={item.id} item={item} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

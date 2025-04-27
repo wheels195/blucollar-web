@@ -147,12 +147,13 @@ export function SiteHeader() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-background/10 text-foreground hover:bg-primary/10 transition-colors"
+            className="md:hidden flex items-center justify-center w-12 h-12 rounded-full bg-background/10 text-foreground hover:bg-primary/10 transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
             onClick={() => setIsMobileMenuOpen(true)}
             aria-label="Open menu"
             type="button"
+            style={{ minWidth: 48, minHeight: 48 }}
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-6 w-6" />
           </button>
         </div>
       </div>
@@ -165,8 +166,8 @@ export function SiteHeader() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-black md:hidden"
-            style={{ color: 'white', background: 'rgba(0,0,0,0.95)' }}
+            className="fixed inset-0 z-[100] bg-black md:hidden shadow-2xl"
+            style={{ color: 'white', background: 'rgba(0,0,0,0.97)' }}
           >
             <div className="flex flex-col min-h-screen h-full p-6">
               <div className="flex justify-between items-center mb-8">
@@ -176,43 +177,31 @@ export function SiteHeader() {
                   </Link>
                 </div>
                 <button
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-background/10 text-foreground hover:bg-primary/10 transition-colors"
+                  className="flex items-center justify-center w-12 h-12 rounded-full bg-background/10 text-foreground hover:bg-primary/10 transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
                   onClick={() => setIsMobileMenuOpen(false)}
+                  style={{ minWidth: 48, minHeight: 48 }}
                 >
                   <span className="sr-only">Close menu</span>
-                  <X className="h-5 w-5" />
+                  <X className="h-6 w-6" />
                 </button>
               </div>
-
-              <nav className="flex flex-col space-y-6 mt-8" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: 'none', fontWeight: 'bold' }}>
+              <nav className="flex flex-col space-y-8 mt-8" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: 'none', fontWeight: 'bold' }}>
                 {navItems.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`text-xl font-medium transition-colors ${
+                    className={`text-2xl font-bold py-4 px-2 rounded-lg transition-colors ${
                       activeSection === item.href.replace("/#", "")
-                        ? "text-primary"
+                        ? "text-primary bg-primary/10"
                         : "text-foreground hover:text-primary"
                     }`}
+                    style={{ minHeight: 48 }}
                     onClick={(e) => handleNavClick(e, item.href)}
                   >
                     {item.name}
                   </Link>
                 ))}
               </nav>
-
-              <div className="mt-auto pt-8">
-                <Link
-                  href="/#contact"
-                  className="block w-full py-3 px-4 rounded-lg bg-primary text-white text-center font-medium hover:bg-primary/90 transition-colors"
-                  onClick={(e) => {
-                    handleNavClick(e, "/#contact")
-                    setIsMobileMenuOpen(false)
-                  }}
-                >
-                  Get a Free Quote
-                </Link>
-              </div>
             </div>
           </motion.div>
         )}

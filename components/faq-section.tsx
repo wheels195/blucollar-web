@@ -186,10 +186,10 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="py-14 sm:py-20 md:py-32 bg-background">
+    <section id="faq" className="py-10 sm:py-20 md:py-32 bg-background">
       <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -204,33 +204,48 @@ export function FAQSection() {
               Frequently Asked <span className="gradient-text">Questions</span>
             </h2>
             <p className="text-lg text-foreground/80">
-              Find detailed answers about our services and how we can help your business succeed online.
+              Answers to common questions about our web design services, process, and results.
             </p>
           </div>
         </ScrollReveal>
 
-        <div className="max-w-4xl mx-auto">
-          {faqs.map((faq, index) => (
-            <ScrollReveal key={index} delay={index * 0.1}>
-              <div className="mb-6">
-                <button
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full flex items-center justify-between p-4 bg-muted/30 hover:bg-muted/50 rounded-lg transition-colors"
-                >
-                  <span className="font-medium text-left">{faq.question}</span>
-                  {openIndex === index ? (
-                    <Minus className="h-5 w-5 text-primary flex-shrink-0" />
+        <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8">
+          {faqs.map((faq, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              className="rounded-xl border border-border bg-muted/30 p-4 sm:p-6 shadow-md"
+            >
+              <button
+                className="flex items-center justify-between w-full text-left text-lg sm:text-xl font-semibold py-4 px-2 sm:px-4 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg transition-colors"
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                aria-expanded={openIndex === i}
+                style={{ minHeight: 56 }}
+              >
+                <span>{faq.question}</span>
+                <span className="ml-4">
+                  {openIndex === i ? (
+                    <Minus className="h-6 w-6" />
                   ) : (
-                    <Plus className="h-5 w-5 text-primary flex-shrink-0" />
+                    <Plus className="h-6 w-6" />
                   )}
-                </button>
-                {openIndex === index && (
-                  <div className="p-6 bg-muted/10 rounded-b-lg">
+                </span>
+              </button>
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={openIndex === i ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                {openIndex === i && (
+                  <div className="pt-4 text-base sm:text-lg text-foreground/80">
                     {faq.answer}
                   </div>
                 )}
-              </div>
-            </ScrollReveal>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>
