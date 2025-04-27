@@ -200,10 +200,14 @@ const portfolioItems: PortfolioItem[] = [
 ]
 
 function PortfolioCard({ item }: { item: PortfolioItem }) {
-  // Only render the title for debugging
   return (
     <div style={{background: 'lightblue', padding: 20, margin: 10, textAlign: 'center'}}>
       <strong>{item.title}</strong>
+      <div>{item.description}</div>
+      <div>{item.images[0]}</div>
+      {item.images[0] && (
+        <img src={item.images[0]} alt={item.title} style={{maxWidth: 200, marginTop: 10}} />
+      )}
     </div>
   )
 }
