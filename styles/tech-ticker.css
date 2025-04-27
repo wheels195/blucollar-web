@@ -1,0 +1,30 @@
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.tech-ticker-outer {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.tech-ticker-inner {
+  width: 100%;
+}
+
+.ticker-track {
+  display: flex;
+  min-width: max-content;
+  animation: ticker-scroll 30s linear infinite;
+}
+
+@media (max-width: 767px) {
+  .ticker-track {
+    animation-duration: 20s;
+  }
+} 

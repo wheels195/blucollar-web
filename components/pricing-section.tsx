@@ -111,11 +111,6 @@ const maintenancePlans = [
 
 export function PricingSection() {
   const prefersReducedMotion = useReducedMotion()
-  const [isClient, setIsClient] = useState(false)
-  
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -141,10 +136,6 @@ export function PricingSection() {
         ease: [0.25, 0.1, 0, 1],
       }
     }
-  }
-
-  if (!isClient) {
-    return null // Prevent SSR flash
   }
 
   return (

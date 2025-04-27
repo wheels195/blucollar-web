@@ -40,7 +40,7 @@ export default function InvestorPage() {
                 </div>
                 <div className="space-y-4">
                   <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-white">
-                    BluCollar Web: <span className="text-blue-500">Websites for the Everyday</span> Businesses
+                    BlueCollar Webs: <span className="text-blue-500">Websites for the Everyday</span> Businesses
                   </h1>
                   <p className="text-gray-300 text-lg md:text-xl max-w-[600px]">
                     A high-growth opportunity in the underserved market of blue-collar business web development.

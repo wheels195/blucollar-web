@@ -18,22 +18,22 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata = {
-  title: "BluCollar Web | Websites for the Everyday Businesses",
+  title: "BlueCollar Webs | Websites for the Everyday Businesses",
   description:
     "We create modern, minimal, and high-performance websites that elevate your brand and drive results. Professional web design and development services for everyday businesses.",
   generator: 'v0.dev',
   metadataBase: new URL('https://blucollar-web.vercel.app'),
   openGraph: {
-    title: 'BluCollar Web | Websites for the Everyday Businesses',
+    title: 'BlueCollar Webs | Websites for the Everyday Businesses',
     description: 'We create modern, minimal, and high-performance websites that elevate your brand and drive results.',
     url: 'https://blucollar-web.vercel.app',
-    siteName: 'BluCollar Web',
+    siteName: 'BlueCollar Webs',
     images: [
       {
         url: '/images/spider-web-logo.png',
         width: 1200,
         height: 630,
-        alt: 'BluCollar Web - Network Visualization Hero',
+        alt: 'BlueCollar Webs - Network Visualization Hero',
       },
     ],
     locale: 'en_US',
@@ -41,7 +41,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BluCollar Web | Websites for the Everyday Businesses',
+    title: 'BlueCollar Webs | Websites for the Everyday Businesses',
     description: 'We create modern, minimal, and high-performance websites that elevate your brand and drive results.',
     images: ['/images/spider-web-logo.png'],
     creator: '@blucollarweb',
@@ -49,7 +49,7 @@ export const metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: "BluCollar Web"
+    title: "BlueCollar Webs"
   },
   formatDetection: {
     telephone: true

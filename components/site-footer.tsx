@@ -60,7 +60,7 @@ export function SiteFooter() {
           <div>
             <h3 className="text-lg font-bold mb-4">Contact</h3>
             <ul className="space-y-3 text-foreground/70">
-              <li>hello@blucollarweb.com</li>
+              <li>hello@bluecollarwebs.com</li>
               <li>(555) 123-4567</li>
               <li>
                 123 Web Design St.
@@ -72,7 +72,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-foreground/60">© {new Date().getFullYear()} BluCollar Web. All rights reserved.</p>
+          <p className="text-sm text-foreground/60">© {new Date().getFullYear()} BlueCollar Webs. All rights reserved.</p>
 
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mt-4 md:mt-0">
             <div className="flex items-center space-x-2 text-sm text-foreground/60">

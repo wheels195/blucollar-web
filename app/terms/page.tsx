@@ -5,9 +5,9 @@ import { SiteFooter } from "@/components/site-footer"
 import { Laptop } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Terms of Service | BluCollar Web",
+  title: "Terms of Service | BlueCollar Webs",
   description:
-    "Terms of Service for BluCollar Web - Understand the terms and conditions for using our web design services.",
+    "Terms of Service for BlueCollar Webs - Understand the terms and conditions for using our web design services.",
   keywords: "terms of service, terms and conditions, web design, blue collar businesses",
 }
 
@@ -18,7 +18,7 @@ export default function TermsOfServicePage() {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Laptop className="h-6 w-6 text-blue-500" />
-            <span className="text-xl font-bold text-white">BluCollar Web</span>
+            <span className="text-xl font-bold text-white">BlueCollar Webs</span>
           </div>
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/" className="font-medium text-gray-400 hover:text-blue-400 transition-colors">
@@ -57,7 +57,7 @@ export default function TermsOfServicePage() {
 
             <div className="prose prose-invert max-w-none">
               <p>
-                Please read these Terms of Service ("Terms") carefully before using the BluCollar Web website or
+                Please read these Terms of Service ("Terms") carefully before using the BlueCollar Webs website or
                 services.
               </p>
 
@@ -69,7 +69,7 @@ export default function TermsOfServicePage() {
 
               <h2>2. Services</h2>
               <p>
-                BluCollar Web provides web design, development, and related services primarily for blue collar
+                BlueCollar Webs provides web design, development, and related services primarily for blue collar
                 businesses. Our services may include:
               </p>
               <ul>

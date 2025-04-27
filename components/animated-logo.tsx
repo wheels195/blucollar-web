@@ -125,13 +125,13 @@ export function AnimatedLogo({
             }`}
             style={{ letterSpacing: "0.02em" }}
           >
-            BluCollar
+            BlueCollar
           </span>
           <span
             className={`${subTextSizeClasses[size]} ${isDark ? "text-blue-300" : "text-blue-500"} font-medium -mt-1`}
             style={{ letterSpacing: "0.05em" }}
           >
-            Web
+            Webs
           </span>
         </div>
       </div>

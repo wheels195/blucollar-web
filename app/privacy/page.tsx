@@ -5,8 +5,8 @@ import { SiteFooter } from "@/components/site-footer"
 import { Laptop } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | BluCollar Web",
-  description: "Privacy Policy for BluCollar Web - Learn how we collect, use, and protect your personal information.",
+  title: "Privacy Policy | BlueCollar Webs",
+  description: "Privacy Policy for BlueCollar Webs - Learn how we collect, use, and protect your personal information.",
   keywords: "privacy policy, data protection, web design, blue collar businesses",
 }
 
@@ -17,7 +17,7 @@ export default function PrivacyPolicyPage() {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Laptop className="h-6 w-6 text-blue-500" />
-            <span className="text-xl font-bold text-white">BluCollar Web</span>
+            <span className="text-xl font-bold text-white">BlueCollar Webs</span>
           </div>
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/" className="font-medium text-gray-400 hover:text-blue-400 transition-colors">
@@ -54,7 +54,7 @@ export default function PrivacyPolicyPage() {
 
             <div className="prose prose-invert max-w-none">
               <p>
-                At BluCollar Web, we take your privacy seriously. This Privacy Policy explains how we collect, use,
+                At BlueCollar Webs, we take your privacy seriously. This Privacy Policy explains how we collect, use,
                 disclose, and safeguard your information when you visit our website or use our services.
               </p>
 

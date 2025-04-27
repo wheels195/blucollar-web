@@ -107,62 +107,70 @@ export default function Home() {
 
       {isMobile ? (
         <>
-          <div className="mb-10"><div id="top" className="h-0" /><HeroSection /></div>
-          <div className="mb-10"><div id="trust" className="h-0" /><TrustSection /></div>
-          <div className="mb-10"><div id="tech" className="h-0" /><TechTicker /></div>
-          <div className="mb-10"><div id="services" className="h-0" /><ServicesSection /></div>
-          <div className="mb-10"><div id="portfolio" className="h-0" /><PortfolioSection /></div>
-          <div className="mb-10"><div id="gallery" className="h-0" /><GallerySection /></div>
-          <div className="mb-10"><div id="process" className="h-0" /><ProcessSection /></div>
-          <div className="mb-10"><div id="pricing" className="h-0" /><PricingSection /></div>
-          <div className="mb-10"><div id="faq" className="h-0" /><FAQSection /></div>
-          <div className="mb-10"><div id="contact" className="h-0" /><ContactSection /></div>
+          <Section id="top" priority>
+            <HeroSection />
+          </Section>
+          <Section id="trust" priority>
+            <TrustSection />
+          </Section>
+          <Section id="tech" priority>
+            <TechTicker />
+          </Section>
+          <Section id="services" priority>
+            <ServicesSection />
+          </Section>
+          <Section id="portfolio" priority>
+            <PortfolioSection />
+          </Section>
+          <Section id="gallery" priority>
+            <GallerySection />
+          </Section>
+          <Section id="process" priority>
+            <ProcessSection />
+          </Section>
+          <Section id="pricing" priority>
+            <PricingSection />
+          </Section>
+          <Section id="faq" priority>
+            <FAQSection />
+          </Section>
+          <Section id="contact" priority>
+            <ContactSection />
+          </Section>
           <SiteFooter />
         </>
       ) : (
         <>
-          {/* Priority sections (above the fold) */}
           <Section id="top" priority>
             <HeroSection />
           </Section>
-
           <Section id="trust" priority>
             <TrustSection />
           </Section>
-
-          <Section id="tech">
+          <Section id="tech" priority>
             <TechTicker />
           </Section>
-
-          {/* Regular sections */}
-          <Section id="services">
+          <Section id="services" priority>
             <ServicesSection />
           </Section>
-
-          <Section id="portfolio">
+          <Section id="portfolio" priority>
             <PortfolioSection />
           </Section>
-
-          <Section id="gallery">
+          <Section id="gallery" priority>
             <GallerySection />
           </Section>
-
-          <Section id="process">
+          <Section id="process" priority>
             <ProcessSection />
           </Section>
-
-          <Section id="pricing">
+          <Section id="pricing" priority>
             <PricingSection />
           </Section>
-
-          <Section id="faq">
+          <Section id="faq" priority>
             <FAQSection />
           </Section>
-
-          <Section id="contact">
+          <Section id="contact" priority>
             <ContactSection />
           </Section>
-
           <SiteFooter />
         </>
       )}

@@ -92,21 +92,21 @@ export function TrustStats() {
   }
 
   return (
-    <div className="relative py-24">
+    <div className="relative py-12">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={containerVariants}
-          className="max-w-4xl mx-auto mb-16 space-y-3"
+          className="max-w-4xl mx-auto mb-4 space-y-3"
         >
-          <motion.p variants={itemVariants} className="text-2xl text-foreground">
+          <motion.p variants={itemVariants} className="text-3xl text-foreground">
             Most customers will visit your website before they ever call you.
           </motion.p>
-          <motion.p variants={itemVariants} className="text-2xl text-foreground">
+          <motion.p variants={itemVariants} className="text-3xl text-foreground">
             If it looks outdated, loads slow, or doesn't work on mobile — they move on.
           </motion.p>
-          <motion.p variants={itemVariants} className="text-2xl text-foreground">
+          <motion.p variants={itemVariants} className="text-3xl text-foreground">
             Here are what the numbers tell us.
           </motion.p>
         </motion.div>

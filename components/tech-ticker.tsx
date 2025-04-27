@@ -3,6 +3,9 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import "@/styles/tech-ticker.css";
+import { Hammer } from "lucide-react";
+import Link from "next/link";
 
 const technologies = [
   { 
@@ -109,15 +112,10 @@ export function TechTicker() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
-    
     checkMobile()
     window.addEventListener('resize', checkMobile)
-    
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
-
-  // Create two sets for smooth loop
-  const tickerItems = [...technologies, ...technologies]
 
   return (
     <div className="bg-background py-4 md:py-8 overflow-hidden border-y border-border">
@@ -126,34 +124,28 @@ export function TechTicker() {
           Powered with <span className="gradient-text">Modern Technology</span>
         </h2>
       </div>
-      
-      <div className="relative mt-1 md:mt-2">
-        <motion.div
-          animate={{
-            x: ["0%", "-50%"]
-          }}
-          transition={{
-            duration: isMobile ? 25 : 30,
-            ease: "linear",
-            repeat: Infinity,
-            repeatType: "loop",
-            repeatDelay: 0
-          }}
-          className="flex whitespace-nowrap items-center justify-start md:justify-center gap-3 md:gap-8"
-          style={{
-            width: "200%" // Make room for two sets
-          }}
-        >
-          {tickerItems.map((tech, index) => (
-            <div
-              key={`${tech.name}-${index}`}
-              className="shrink-0 flex flex-col items-center px-1.5 md:px-4"
-              style={{
-                width: `${100 / technologies.length}%` // Ensure even spacing
-              }}
-            >
-              {tech.url ? (
-                <a href={tech.url} target="_blank" rel="noopener noreferrer" tabIndex={-1} className="focus:outline-none">
+      <div className="relative mt-1 md:mt-2 tech-ticker-outer">
+        <div className="tech-ticker-inner">
+          <div className="ticker-track flex items-center gap-8">
+            {technologies.map((tech, index) => (
+              <div
+                key={`${tech.name}-${index}`}
+                className="shrink-0 flex flex-col items-center px-1.5 md:px-4"
+              >
+                {tech.url ? (
+                  <a href={tech.url} target="_blank" rel="noopener noreferrer" tabIndex={-1} className="focus:outline-none">
+                    <div className="relative w-9 h-9 md:w-12 md:h-12 mb-1 md:mb-2 bg-muted rounded-lg p-1.5 md:p-2 shadow-sm">
+                      <Image
+                        src={tech.logo}
+                        alt={`${tech.name} logo`}
+                        fill
+                        className="object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                        unoptimized
+                        priority={index < 8}
+                      />
+                    </div>
+                  </a>
+                ) : (
                   <div className="relative w-9 h-9 md:w-12 md:h-12 mb-1 md:mb-2 bg-muted rounded-lg p-1.5 md:p-2 shadow-sm">
                     <Image
                       src={tech.logo}
@@ -164,28 +156,66 @@ export function TechTicker() {
                       priority={index < 8}
                     />
                   </div>
-                </a>
-              ) : (
-                <div className="relative w-9 h-9 md:w-12 md:h-12 mb-1 md:mb-2 bg-muted rounded-lg p-1.5 md:p-2 shadow-sm">
-                  <Image
-                    src={tech.logo}
-                    alt={`${tech.name} logo`}
-                    fill
-                    className="object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-                    unoptimized
-                    priority={index < 8}
-                  />
-                </div>
-              )}
-              <span className="text-[11px] md:text-sm text-white font-medium text-center leading-tight md:leading-normal">
-                {tech.name}
-              </span>
-              <span className="text-[9px] md:text-xs text-gray-400 text-center leading-tight md:leading-normal">
-                {tech.category}
-              </span>
-            </div>
-          ))}
-        </motion.div>
+                )}
+                <span className="text-[11px] md:text-sm text-white font-medium text-center leading-tight md:leading-normal">
+                  {tech.name}
+                </span>
+                <span className="text-[9px] md:text-xs text-gray-400 text-center leading-tight md:leading-normal">
+                  {tech.category}
+                </span>
+              </div>
+            ))}
+            {/* Duplicate for seamless loop */}
+            {technologies.map((tech, index) => (
+              <div
+                key={`dup-${tech.name}-${index}`}
+                className="shrink-0 flex flex-col items-center px-1.5 md:px-4"
+              >
+                {tech.url ? (
+                  <a href={tech.url} target="_blank" rel="noopener noreferrer" tabIndex={-1} className="focus:outline-none">
+                    <div className="relative w-9 h-9 md:w-12 md:h-12 mb-1 md:mb-2 bg-muted rounded-lg p-1.5 md:p-2 shadow-sm">
+                      <Image
+                        src={tech.logo}
+                        alt={`${tech.name} logo`}
+                        fill
+                        className="object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                        unoptimized
+                        priority={index < 8}
+                      />
+                    </div>
+                  </a>
+                ) : (
+                  <div className="relative w-9 h-9 md:w-12 md:h-12 mb-1 md:mb-2 bg-muted rounded-lg p-1.5 md:p-2 shadow-sm">
+                    <Image
+                      src={tech.logo}
+                      alt={`${tech.name} logo`}
+                      fill
+                      className="object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                      unoptimized
+                      priority={index < 8}
+                    />
+                  </div>
+                )}
+                <span className="text-[11px] md:text-sm text-white font-medium text-center leading-tight md:leading-normal">
+                  {tech.name}
+                </span>
+                <span className="text-[9px] md:text-xs text-gray-400 text-center leading-tight md:leading-normal">
+                  {tech.category}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* CTA Button below ticker */}
+      <div className="flex justify-center mt-10">
+        <a
+          href="#contact"
+          className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-xl shadow-primary/25 hover:shadow-primary/50 gap-2"
+        >
+          <Hammer className="w-6 h-6 mr-1 text-white" />
+          Begin Your Build
+        </a>
       </div>
     </div>
   )
