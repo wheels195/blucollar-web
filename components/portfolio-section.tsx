@@ -357,11 +357,13 @@ export function PortfolioSection() {
   return (
     <>
       <div style={{background: 'red', color: 'white', padding: 20, textAlign: 'center'}}>
-        TEST: PortfolioSection is rendering (step 2)
+        TEST: PortfolioSection is rendering (step 3)
       </div>
-      <div style={{background: 'lightblue', padding: 20, margin: 10, textAlign: 'center'}}>
-        STATIC CARD TEST
-      </div>
+      {["One", "Two", "Three"].map((item, idx) => (
+        <div key={idx} style={{background: 'lightblue', padding: 20, margin: 10, textAlign: 'center'}}>
+          SIMPLE ITEM: {item}
+        </div>
+      ))}
     </>
   )
 }
