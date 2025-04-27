@@ -62,30 +62,13 @@ export default function Home() {
     restDelta: 0.001
   })
 
-  const [isMobile, setIsMobile] = useState(false)
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const checkMobile = () => setIsMobile(window.innerWidth < 768)
-      checkMobile()
-      window.addEventListener('resize', checkMobile)
-      return () => window.removeEventListener('resize', checkMobile)
-    }
-  }, [])
-
   useEffect(() => {
     // Ensure smooth scrolling
     document.documentElement.style.scrollBehavior = "smooth"
-
-    // Optimize for mobile
-    if (isMobile) {
-      document.body.classList.add("no-custom-cursor")
-    }
-
     // Enable passive scroll listeners
     const opts = { passive: true }
     document.addEventListener('touchstart', () => {}, opts)
     document.addEventListener('touchmove', () => {}, opts)
-
     return () => {
       document.body.style.overflow = ""
       document.documentElement.style.overflow = ""
@@ -93,7 +76,7 @@ export default function Home() {
       document.removeEventListener('touchstart', () => {})
       document.removeEventListener('touchmove', () => {})
     }
-  }, [isMobile])
+  }, [])
 
   return (
     <main className="min-h-screen relative">
@@ -102,78 +85,38 @@ export default function Home() {
         className="fixed top-0 left-0 right-0 h-1 bg-primary z-50"
         style={{ scaleX, transformOrigin: "0%" }}
       />
-
       <SiteHeader />
-
-      {isMobile ? (
-        <>
-          <Section id="top" priority>
-            <HeroSection />
-          </Section>
-          <Section id="trust" priority>
-            <TrustSection />
-          </Section>
-          <Section id="tech" priority>
-            <TechTicker />
-          </Section>
-          <Section id="services" priority>
-            <ServicesSection />
-          </Section>
-          <Section id="portfolio" priority>
-            <PortfolioSection />
-          </Section>
-          <Section id="gallery" priority>
-            <GallerySection />
-          </Section>
-          <Section id="process" priority>
-            <ProcessSection />
-          </Section>
-          <Section id="pricing" priority>
-            <PricingSection />
-          </Section>
-          <Section id="faq" priority>
-            <FAQSection />
-          </Section>
-          <Section id="contact" priority>
-            <ContactSection />
-          </Section>
-          <SiteFooter />
-        </>
-      ) : (
-        <>
-          <Section id="top" priority>
-            <HeroSection />
-          </Section>
-          <Section id="trust" priority>
-            <TrustSection />
-          </Section>
-          <Section id="tech" priority>
-            <TechTicker />
-          </Section>
-          <Section id="services" priority>
-            <ServicesSection />
-          </Section>
-          <Section id="portfolio" priority>
-            <PortfolioSection />
-          </Section>
-          <Section id="gallery" priority>
-            <GallerySection />
-          </Section>
-          <Section id="process" priority>
-            <ProcessSection />
-          </Section>
-          <Section id="pricing" priority>
-            <PricingSection />
-          </Section>
-          <Section id="faq" priority>
-            <FAQSection />
-          </Section>
-          <Section id="contact" priority>
-            <ContactSection />
-          </Section>
-          <SiteFooter />
-        </>
-      )}
+      <Section id="top" priority>
+        <HeroSection />
+      </Section>
+      <Section id="trust" priority>
+        <TrustSection />
+      </Section>
+      <Section id="tech" priority>
+        <TechTicker />
+      </Section>
+      <Section id="services" priority>
+        <ServicesSection />
+      </Section>
+      <Section id="portfolio" priority>
+        <PortfolioSection />
+      </Section>
+      <Section id="gallery" priority>
+        <GallerySection />
+      </Section>
+      <Section id="process" priority>
+        <ProcessSection />
+      </Section>
+      <Section id="pricing" priority>
+        <PricingSection />
+      </Section>
+      <Section id="faq" priority>
+        <FAQSection />
+      </Section>
+      <Section id="contact" priority>
+        <ContactSection />
+      </Section>
+      <SiteFooter />
     </main>
   )
 }
