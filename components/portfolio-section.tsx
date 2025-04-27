@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { useMediaQuery } from "@uidotdev/usehooks"
 import { Rocket } from "lucide-react"
 
 const categories = [
@@ -411,6 +410,9 @@ export function PortfolioSection() {
         `}</style>
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+          <div style={{color: 'red', fontWeight: 'bold', fontSize: '1.2rem', padding: '1rem', background: '#fff', border: '2px solid red', borderRadius: '8px', marginBottom: '1rem', textAlign: 'center'}}>
+            DEBUG: Portfolio grid rendered
+          </div>
           {filteredItems.map((item) => (
             <PortfolioCard key={item.id} item={item} />
           ))}

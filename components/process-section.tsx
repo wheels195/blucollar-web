@@ -135,6 +135,20 @@ export function ProcessSection() {
             ))}
           </div>
         </div>
+
+        <div style={{
+          color: 'green',
+          fontWeight: 'bold',
+          fontSize: '1.2rem',
+          padding: '1rem',
+          background: '#fff',
+          border: '2px solid green',
+          borderRadius: '8px',
+          marginBottom: '1rem',
+          textAlign: 'center'
+        }}>
+          TEST: This should always show on all devices
+        </div>
       </div>
     </section>
   )
