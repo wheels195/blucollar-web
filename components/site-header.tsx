@@ -91,22 +91,37 @@ export function SiteHeader() {
   const handleNavClick = (e, href) => {
     if (href.startsWith("/#")) {
       e.preventDefault();
-      const targetId = href.replace("/#", "");
-      const targetElement = document.getElementById(targetId);
-      console.log("[NavClick] href:", href, "targetId:", targetId, "found:", !!targetElement);
-      if (targetElement) {
-        const navOffset = window.innerWidth < 768 ? 64 : 80; // Responsive offset
-        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-          top: elementPosition - navOffset,
-          behavior: "smooth",
-        });
-      } else if (targetId === "top") {
-        // Fallback: scroll to top if Home/logo is clicked and no element found
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        setIsMobileMenuOpen(false); // Close menu immediately
+        setTimeout(() => {
+          const targetId = href.replace("/#", "");
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            const navOffset = 64; // Mobile nav height
+            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({
+              top: elementPosition - navOffset,
+              behavior: "smooth",
+            });
+          } else if (targetId === "top") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        }, 500); // Increased delay for menu close animation and scroll lock release
+      } else {
+        const targetId = href.replace("/#", "");
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          const navOffset = 80; // Desktop nav height
+          const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: elementPosition - navOffset,
+            behavior: "smooth",
+          });
+        } else if (targetId === "top") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       }
-      // Always close the mobile menu after navigation
-      setTimeout(() => setIsMobileMenuOpen(false), 200);
     }
   };
 
@@ -166,7 +181,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-black md:hidden shadow-2xl"
+            className="fixed inset-0 z-[100] bg-black md:hidden shadow-2xl w-full overflow-y-auto"
             style={{ color: 'white', background: 'rgba(0,0,0,0.97)' }}
           >
             <div className="flex flex-col min-h-screen h-full p-6">
@@ -185,12 +200,12 @@ export function SiteHeader() {
                   <X className="h-6 w-6" />
                 </button>
               </div>
-              <nav className="flex flex-col space-y-8 mt-8" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: 'none', fontWeight: 'bold' }}>
+              <nav className="flex flex-col space-y-8 mt-8 w-full" style={{ color: 'white', WebkitTextFillColor: 'white', textShadow: 'none', fontWeight: 'bold' }}>
                 {navItems.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`text-2xl font-bold py-4 px-2 rounded-lg transition-colors ${
+                    className={`text-2xl font-bold py-4 px-2 rounded-lg transition-colors w-full text-left ${
                       activeSection === item.href.replace("/#", "")
                         ? "text-primary bg-primary/10"
                         : "text-foreground hover:text-primary"
