@@ -237,8 +237,8 @@ export function PricingSection() {
                   </ul>
                 </div>
                 <div className="p-6 pt-0">
-                  <Link
-                    href="/contact"
+                  <a
+                    href="#contact"
                     className={`inline-block w-full text-center py-3 px-4 rounded-lg border ${
                       plan.popular
                         ? "bg-primary text-primary-foreground hover:bg-primary/90"
@@ -246,7 +246,7 @@ export function PricingSection() {
                     } font-medium transition-colors duration-200`}
                   >
                     {plan.cta}
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             ))}
@@ -321,8 +321,8 @@ export function PricingSection() {
                   </ul>
                 </div>
                 <div className="p-6 pt-0">
-                  <Link
-                    href="/contact"
+                  <a
+                    href="#contact"
                     className={`inline-block w-full text-center py-3 px-4 rounded-lg border ${
                       plan.popular
                         ? "bg-primary text-primary-foreground hover:bg-primary/90"
@@ -330,7 +330,7 @@ export function PricingSection() {
                     } font-medium transition-colors duration-200`}
                   >
                     Subscribe
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             ))}
