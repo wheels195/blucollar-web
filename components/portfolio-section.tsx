@@ -357,11 +357,11 @@ export function PortfolioSection() {
   return (
     <>
       <div style={{background: 'red', color: 'white', padding: 20, textAlign: 'center'}}>
-        TEST: PortfolioSection is rendering (step 3)
+        TEST: PortfolioSection is rendering (step 4)
       </div>
-      {["One", "Two", "Three"].map((item, idx) => (
-        <div key={idx} style={{background: 'lightblue', padding: 20, margin: 10, textAlign: 'center'}}>
-          SIMPLE ITEM: {item}
+      {portfolioItems.map((item, idx) => (
+        <div key={item.id} style={{background: 'lightblue', padding: 20, margin: 10, textAlign: 'center'}}>
+          PORTFOLIO ITEM: {item.title}
         </div>
       ))}
     </>
