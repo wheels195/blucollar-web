@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Shield, Lock } from "lucide-react"
+import { Shield, Lock, Handshake } from "lucide-react"
 import { Logo } from "./logo"
 
 export function SiteFooter() {
@@ -8,7 +8,8 @@ export function SiteFooter() {
       <div className="container mx-auto px-4 flex flex-col items-center">
         <div className="flex flex-col items-center mb-8">
           <span className="text-xl font-bold mb-4 text-white text-center">Ready to grow your business? Let's talk!</span>
-          <a href="#contact" className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-xl shadow-primary/25 hover:shadow-primary/50">
+          <a href="#contact" className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-xl shadow-primary/25 hover:shadow-primary/50 gap-2">
+            <Handshake className="w-6 h-6 mr-1" />
             Contact Us
           </a>
         </div>

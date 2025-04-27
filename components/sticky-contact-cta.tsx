@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { MessageSquare, MessageCircle } from "lucide-react"
+import { MessageSquare, MessageCircle, DollarSign } from "lucide-react"
 
 export function StickyContactCTA() {
   const [isVisible, setIsVisible] = useState(false)
@@ -51,7 +51,7 @@ export function StickyContactCTA() {
             style={{ minWidth: 180, display: 'none', pointerEvents: 'auto' }}
             id="sticky-contact-cta"
           >
-            <MessageCircle className="w-6 h-6 mr-2" />
+            <DollarSign className="w-6 h-6 mr-2" />
             Get a Free Quote
           </a>
         </motion.div>

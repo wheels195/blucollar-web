@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { useMediaQuery } from "@uidotdev/usehooks"
+import { Rocket } from "lucide-react"
 
 const categories = [
   { id: "all", label: "All" },
@@ -416,7 +417,8 @@ export function PortfolioSection() {
         </div>
         {/* CTA below grid */}
         <div className="flex justify-center mt-10">
-          <a href="#contact" className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-xl shadow-primary/25 hover:shadow-primary/50">
+          <a href="#contact" className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-xl shadow-primary/25 hover:shadow-primary/50 gap-2">
+            <Rocket className="w-6 h-6 mr-1" />
             Start Your Project
           </a>
         </div>

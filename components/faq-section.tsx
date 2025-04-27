@@ -1,7 +1,7 @@
 "use client"
 
 import { ScrollReveal } from "./scroll-reveal"
-import { Plus, Minus } from "lucide-react"
+import { Plus, Minus, Mail } from "lucide-react"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
@@ -251,7 +251,8 @@ export function FAQSection() {
         {/* CTA below FAQ */}
         <div className="flex flex-col items-center justify-center mt-12">
           <span className="text-lg font-semibold mb-4 text-white">Still have questions?</span>
-          <a href="#contact" className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-xl shadow-primary/25 hover:shadow-primary/50">
+          <a href="#contact" className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-primary hover:bg-primary/90 transition-colors duration-200 shadow-xl shadow-primary/25 hover:shadow-primary/50 gap-2">
+            <Mail className="w-6 h-6 mr-1" />
             Contact Us
           </a>
         </div>
