@@ -107,36 +107,16 @@ export default function Home() {
 
       {isMobile ? (
         <>
-          <div id="top" className="mb-10">
-            <HeroSection />
-          </div>
-          <div id="trust" className="mb-10">
-            <TrustSection />
-          </div>
-          <div id="tech" className="mb-10">
-            <TechTicker />
-          </div>
-          <div id="services" className="mb-10">
-            <ServicesSection />
-          </div>
-          <div id="portfolio" className="mb-10">
-            <PortfolioSection />
-          </div>
-          <div id="gallery" className="mb-10">
-            <GallerySection />
-          </div>
-          <div id="process" className="mb-10">
-            <ProcessSection />
-          </div>
-          <div id="pricing" className="mb-10">
-            <PricingSection />
-          </div>
-          <div id="faq" className="mb-10">
-            <FAQSection />
-          </div>
-          <div id="contact" className="mb-10">
-            <ContactSection />
-          </div>
+          <div className="mb-10"><div id="top" className="h-0" /><HeroSection /></div>
+          <div className="mb-10"><div id="trust" className="h-0" /><TrustSection /></div>
+          <div className="mb-10"><div id="tech" className="h-0" /><TechTicker /></div>
+          <div className="mb-10"><div id="services" className="h-0" /><ServicesSection /></div>
+          <div className="mb-10"><div id="portfolio" className="h-0" /><PortfolioSection /></div>
+          <div className="mb-10"><div id="gallery" className="h-0" /><GallerySection /></div>
+          <div className="mb-10"><div id="process" className="h-0" /><ProcessSection /></div>
+          <div className="mb-10"><div id="pricing" className="h-0" /><PricingSection /></div>
+          <div className="mb-10"><div id="faq" className="h-0" /><FAQSection /></div>
+          <div className="mb-10"><div id="contact" className="h-0" /><ContactSection /></div>
           <SiteFooter />
         </>
       ) : (
