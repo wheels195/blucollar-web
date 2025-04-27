@@ -200,140 +200,11 @@ const portfolioItems: PortfolioItem[] = [
 ]
 
 function PortfolioCard({ item }: { item: PortfolioItem }) {
-  const [isHovered, setIsHovered] = useState(false)
-  const [isExpanded, setIsExpanded] = useState(false)
-  const imageRef = useRef<HTMLDivElement>(null)
-  const scrollInterval = useRef<NodeJS.Timeout | null>(null)
-  const [isTouchDevice, setIsTouchDevice] = useState(false)
-  const [imgError, setImgError] = useState(false)
-
-  useEffect(() => {
-    // Detect touch device
-    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0)
-  }, [])
-
-  useEffect(() => {
-    if (isHovered && imageRef.current && !isTouchDevice) {
-      // Start at the top when hover begins
-      imageRef.current.scrollTop = 0
-      
-      // Calculate scroll parameters
-      const totalHeight = imageRef.current.scrollHeight - imageRef.current.clientHeight
-      const duration = 15000 // 15 seconds to scroll full page
-      const steps = 100 // Number of steps for smooth scrolling
-      const stepSize = totalHeight / steps
-      let currentStep = 0
-
-      scrollInterval.current = setInterval(() => {
-        if (imageRef.current && currentStep < steps) {
-          imageRef.current.scrollTop += stepSize
-          currentStep++
-        } else if (imageRef.current) {
-          // Reset to top when reaching bottom
-          imageRef.current.scrollTop = 0
-          currentStep = 0
-        }
-      }, duration / steps)
-    } else if (scrollInterval.current) {
-      clearInterval(scrollInterval.current)
-    }
-
-    return () => {
-      if (scrollInterval.current) {
-        clearInterval(scrollInterval.current)
-      }
-    }
-  }, [isHovered, isTouchDevice])
-
+  // Only render the title for debugging
   return (
-    <>
-      <motion.div
-        layout
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="relative group rounded-2xl overflow-hidden w-full aspect-[4/3] cursor-pointer min-h-[340px] md:min-h-[420px] lg:min-h-[500px] xl:min-h-[560px]"
-        onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
-        onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
-        onClick={() => setIsExpanded(true)}
-        onTouchStart={() => isTouchDevice && setIsHovered(true)}
-        onTouchEnd={() => isTouchDevice && setIsHovered(false)}
-      >
-        <div 
-          ref={imageRef}
-          className="absolute inset-0 overflow-auto scrollbar-hide"
-        >
-          {!imgError ? (
-            <Image
-              src={item.images[0]}
-              alt={`${item.title} screenshot`}
-              width={1200}
-              height={5000}
-              className="w-full"
-              priority={false}
-              loading="lazy"
-              quality={isTouchDevice ? 60 : 80}
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-red-200 text-red-800 font-bold">Image not found</div>
-          )}
-        </div>
-        <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 ${isTouchDevice ? (isHovered ? 'opacity-100' : 'opacity-0') : 'opacity-0 group-hover:opacity-100'}`} />
-        <div className={`absolute bottom-0 left-0 right-0 p-6 text-white transition-transform duration-300 ${isTouchDevice ? (isHovered ? 'translate-y-0' : 'translate-y-8') : 'translate-y-8 group-hover:translate-y-0'}`}>
-          <span className="inline-block rounded bg-primary px-2 py-1 text-xs font-semibold uppercase tracking-wider mb-2">
-            {item.category}
-          </span>
-          <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-          <p className="text-sm text-white/80">{item.description}</p>
-        </div>
-      </motion.div>
-
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 touch-none"
-            onClick={() => setIsExpanded(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              className="relative w-full max-h-[90vh] rounded-2xl overflow-hidden bg-background"
-              style={{ maxWidth: isTouchDevice ? '100%' : '1200px' }}
-              onClick={e => e.stopPropagation()}
-            >
-              <div className="overflow-auto max-h-[90vh] touch-pan-y">
-                <Image
-                  src={item.images[0]}
-                  alt={`${item.title} screenshot`}
-                  width={1920}
-                  height={5000}
-                  className="w-full"
-                  priority
-                />
-              </div>
-              <button
-                onClick={() => setIsExpanded(false)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-                style={{ 
-                  padding: isTouchDevice ? '12px' : '8px',
-                  transform: isTouchDevice ? 'scale(1.2)' : 'scale(1)'
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+    <div style={{background: 'lightblue', padding: 20, margin: 10, textAlign: 'center'}}>
+      <strong>{item.title}</strong>
+    </div>
   )
 }
 
@@ -357,12 +228,20 @@ export function PortfolioSection() {
   return (
     <>
       <div style={{background: 'red', color: 'white', padding: 20, textAlign: 'center'}}>
-        TEST: PortfolioSection is rendering (step 4)
+        TEST: PortfolioSection is rendering (step 6)
       </div>
-      {portfolioItems.map((item, idx) => (
-        <div key={item.id} style={{background: 'lightblue', padding: 20, margin: 10, textAlign: 'center'}}>
-          PORTFOLIO ITEM: {item.title}
-        </div>
+      {portfolioItems.map((item) => (
+        <PortfolioCard
+          key={item.id}
+          item={{
+            id: item.id,
+            title: item.title,
+            category: '',
+            description: '',
+            images: [],
+            type: 'template',
+          }}
+        />
       ))}
     </>
   )
