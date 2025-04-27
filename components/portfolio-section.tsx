@@ -355,8 +355,13 @@ export function PortfolioSection() {
     : portfolioItems.filter(item => item.category === selectedCategory)
 
   return (
-    <div style={{background: 'red', color: 'white', padding: 20, textAlign: 'center'}}>
-      TEST: PortfolioSection is rendering (minimal)
-    </div>
+    <>
+      <div style={{background: 'red', color: 'white', padding: 20, textAlign: 'center'}}>
+        TEST: PortfolioSection is rendering (step 2)
+      </div>
+      <div style={{background: 'lightblue', padding: 20, margin: 10, textAlign: 'center'}}>
+        STATIC CARD TEST
+      </div>
+    </>
   )
 }
