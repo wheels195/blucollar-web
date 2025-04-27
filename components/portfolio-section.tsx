@@ -340,8 +340,10 @@ function PortfolioCard({ item }: { item: PortfolioItem }) {
 export function PortfolioSection() {
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [isMobile, setIsMobile] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== 'undefined') {
       const checkMobile = () => setIsMobile(window.innerWidth < 768)
       checkMobile()
@@ -349,6 +351,8 @@ export function PortfolioSection() {
       return () => window.removeEventListener('resize', checkMobile)
     }
   }, [])
+
+  if (!mounted) return null;
 
   const filteredItems = selectedCategory === "all"
     ? portfolioItems
