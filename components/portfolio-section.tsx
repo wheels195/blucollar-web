@@ -22,23 +22,13 @@ const categories = [
 
 export function PortfolioSection() {
   const [selectedCategory, setSelectedCategory] = useState("all")
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const checkMobile = () => setIsMobile(window.innerWidth < 768)
-      checkMobile()
-      window.addEventListener("resize", checkMobile)
-      return () => window.removeEventListener("resize", checkMobile)
-    }
-  }, [])
 
   const filteredItems = selectedCategory === "all"
     ? portfolioItems
     : portfolioItems.filter(item => item.category === selectedCategory)
 
   return (
-    <section className={`w-full py-10 sm:py-16 md:py-32 ${isMobile ? "bg-background" : ""}`}>
+    <section className="w-full py-10 sm:py-16 md:py-32 bg-background">
       <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16">
           <motion.div
