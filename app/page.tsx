@@ -120,7 +120,9 @@ export default function Home() {
             <ServicesSection />
           </Section>
           <Section id="portfolio" priority>
-            <PortfolioSection />
+            <section style={{background: 'yellow', color: 'black', padding: 40, textAlign: 'center'}}>
+              IF YOU SEE THIS, THE SECTION IS RENDERING
+            </section>
           </Section>
           <Section id="gallery" priority>
             <GallerySection />
