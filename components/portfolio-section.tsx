@@ -232,6 +232,7 @@ export function PortfolioSection() {
       <div style={{background: 'red', color: 'white', padding: 20, textAlign: 'center'}}>
         TEST: PortfolioSection is rendering (step 6)
       </div>
+      <img src="/images/portfolio-assets/electrician-template.png" alt="Test" style={{maxWidth: 200}} />
       {portfolioItems.map((item) => (
         <PortfolioCard
           key={item.id}
